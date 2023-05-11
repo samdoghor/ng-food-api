@@ -1,6 +1,6 @@
 # Nigeria Food Database APIs
 
-The Nigerian Food Database API is a RESTful API built with Flask-RESTful and MySQL to provide information on various Nigerian dishes. Developers can access data on ingredients, nutritional value, and cooking instructions for each dish to build food-related applications and promote Nigerian cuisine.
+The Nigerian Food Database API is a RESTful API built with Flask-RESTful and PostgreSQL to provide information on various Nigerian dishes. Developers can access data on ingredients, nutritional value, and cooking instructions for each dish to build food-related applications and promote Nigerian cuisine.
 
 ## Contributing
 

@@ -15,7 +15,7 @@ dbName = os.getenv('DB_NAME')
 DEBUG = True
 
 # database (MYSQL)
-SQLALCHEMY_DATABASE_URI = f'mysql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'
+SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # server
