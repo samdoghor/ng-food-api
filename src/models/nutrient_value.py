@@ -1,18 +1,30 @@
 # imports
 
+from datetime import datetime
+
 from . import db
 
 # model
 
 
 class NutrientValue(db.Model):
-    ''' This class defines nutrients e.g Vit. A '''
+    ''' This class defines nutrients e.g 700'''
 
     __tablename__ = 'nutrient_values'
 
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
 
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    updated_at = db.Column(
+        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+
     # foreign keys
-    nutrients_id = db.Column(db.Integer, db.ForeignKey(
+    nutrient_id = db.Column(db.Integer, db.ForeignKey(
         'nutrients.id'), nullable=False)
+
+    food_id = db.Column(db.Integer, db.ForeignKey(
+        'foods.id'), nullable=False)
+
+    def __repr__(self):
+        return f'NutrientValue(name={self.nutrients.name},id={self.id}, quantity={self.quantity})'
