@@ -7,7 +7,7 @@ from . import db
 # model
 
 
-class LocalFoodName(db.Model):
+class LocalFoodNameModel(db.Model):
     ''' This class defines local name for the foods e.g Rosu (Rice) '''
 
     __tablename__ = 'local_food_names'

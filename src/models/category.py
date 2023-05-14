@@ -7,7 +7,7 @@ from . import db
 # model
 
 
-class Category(db.Model):
+class CategoryModel(db.Model):
     ''' This class defines categories in which the food falls under e.g Cereal '''
 
     __tablename__ = 'categories'
