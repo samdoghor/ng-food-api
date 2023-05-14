@@ -7,7 +7,7 @@ from . import db
 # model
 
 
-class Tribe(db.Model):
+class TribeModel(db.Model):
     ''' This class defines tribes in which the food could have names in e.g Urhobo '''
 
     __tablename__ = 'tribes'

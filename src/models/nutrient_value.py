@@ -7,7 +7,7 @@ from . import db
 # model
 
 
-class NutrientValue(db.Model):
+class NutrientValueModel(db.Model):
     ''' This class defines nutrients e.g 700'''
 
     __tablename__ = 'nutrient_values'

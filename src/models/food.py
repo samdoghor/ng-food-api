@@ -7,7 +7,7 @@ from . import db
 # model
 
 
-class Food(db.Model):
+class FoodModel(db.Model):
     ''' This class defines the Food Model e.g Rice '''
 
     __tablename__ = 'foods'
