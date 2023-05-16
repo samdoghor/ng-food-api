@@ -1,6 +1,15 @@
 """
-Define an Abstract Base Class (ABC) for models
+Module Name: abc.py
+
+This module defines the BaseModel and MetaBaseModel classes.
+
+The BaseModel class provides common functionality such as printing, JSON serialization, saving, and deleting for models. The MetaBaseModel class is a metaclass that allows managing aliases for models.
+
+Both classes are designed to be inherited by specific models to reuse the common functionality they provide.
 """
+
+# imports
+
 from datetime import datetime
 from weakref import WeakValueDictionary
 

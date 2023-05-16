@@ -1,3 +1,29 @@
+"""
+Module Name: tribe.py
+
+This module defines the TribeModel class, representing tribes in which food could have names (e.g., Urhobo).
+
+The TribeModel class is a SQLAlchemy model that extends the BaseModel and uses the MetaBaseModel metaclass.
+It provides database columns for storing tribe information, such as tribe name, description, and location.
+It also defines a relationship with the LocalFoodNameModel model.
+
+Example Usage:
+--------------
+# Creating a new tribe
+tribe = TribeModel(tribe="Urhobo", description="A tribe in Nigeria", location="Delta State")
+tribe.save()
+
+# Retrieving all tribes
+tribes = TribeModel.query.all()
+
+# Accessing tribe properties
+for tribe in tribes:
+    print(tribe.tribe)
+    print(tribe.description)
+    print(tribe.location)
+
+"""
+
 # imports
 
 from datetime import datetime
@@ -24,7 +50,7 @@ class TribeModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     # relationships
     local_food_names = db.relationship(
-        'LocalFoodName', backref='tribes', lazy=True)
+        'LocalFoodNameModel', backref='tribes', lazy=True)
 
     def __repr__(self):
         return f'Tribe(id={self.id}, tribe={self.tribe})'

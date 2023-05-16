@@ -1,3 +1,13 @@
+"""
+Module Name: server.py
+===========
+
+This module is responsible for setting up and running the Nigeria Food Database API server.
+
+It imports necessary modules, configures the server, and defines routes and endpoints for the API.
+
+"""
+
 # imports
 
 from flask import Blueprint, Flask, jsonify, request
@@ -45,7 +55,7 @@ for blueprint in vars(routes).values():
 def index():
     """ Confirms and displays basic info that the server is runnign """
 
-    server = jsonify({
+    server_home = jsonify({
         "App Name": "Nigeria Food Database API",
         "API Version": "v1",
         "Current URL": f"{request.url}",
@@ -54,7 +64,7 @@ def index():
         "Version": "1.0.0"
     })
 
-    return server
+    return server_home
 
 # run
 

@@ -1,3 +1,28 @@
+"""
+Module Name: category.py
+
+This module defines the CategoryModel class, representing categories in which the food falls under (e.g., Cereal).
+
+The CategoryModel class is a SQLAlchemy model that extends the BaseModel and uses the MetaBaseModel metaclass.
+It provides database columns for storing category information, such as name, description, and timestamps.
+It also defines relationships with the FoodModel model.
+
+Example Usage:
+--------------
+# Creating a new category
+category = CategoryModel(name='Cereal', description='Breakfast cereals')
+category.save()
+
+# Retrieving all categories
+categories = CategoryModel.query.all()
+
+# Accessing category properties
+for category in categories:
+    print(category.name)
+    print(category.foods)
+
+"""
+
 # imports
 
 from datetime import datetime
@@ -20,9 +45,6 @@ class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    # relationships
-    foods = db.relationship('Food', backref='categories', lazy=True)
 
     def __repr__(self):
         return f'Category(id={self.id}, name={self.name})'

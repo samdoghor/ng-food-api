@@ -1,3 +1,28 @@
+"""
+Module Name: local_food_name.py
+
+This module defines the LocalFoodNameModel class, representing local names for food items (e.g., Rosu (Rice)).
+
+The LocalFoodNameModel class is a SQLAlchemy model that extends the BaseModel and uses the MetaBaseModel metaclass.
+It provides database columns for storing local food name information, such as name and timestamps.
+It also defines relationships with the TribeModel and FoodModel models.
+
+Example Usage:
+--------------
+# Creating a new local food name
+local_food_name = LocalFoodNameModel(name='Rosu (Rice)', tribe_id=1, food_id=1)
+local_food_name.save()
+
+# Retrieving all local food names
+local_food_names = LocalFoodNameModel.query.all()
+
+# Accessing local food name properties
+for local_food_name in local_food_names:
+    print(local_food_name.name)
+    print(local_food_name.food)
+
+"""
+
 # imports
 
 from datetime import datetime
@@ -26,7 +51,7 @@ class LocalFoodNameModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     food_id = db.Column(db.Integer, db.ForeignKey('foods.id'), nullable=False)
 
     # relationships
-    food = db.relationship('Food', backref='local_names')
+    food = db.relationship('FoodModel', backref='local_names')
 
     def __repr__(self):
         return f'LocalFoodName(id={self.id}, name={self.name})'
