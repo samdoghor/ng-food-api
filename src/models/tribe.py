@@ -17,9 +17,9 @@ class TribeModel(db.Model):
     description = db.Column(db.String())
     location = db.Column(db.String())
 
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # relationships
     local_food_names = db.relationship(

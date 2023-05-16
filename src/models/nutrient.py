@@ -18,9 +18,9 @@ class NutrientModel(db.Model):
     value_unit = db.Column(db.String())
     is_essential = db.Column(db.Boolean)
 
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # relationships
     nutrient_values = db.relationship(

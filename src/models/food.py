@@ -17,9 +17,9 @@ class FoodModel(db.Model):
     scientific_name = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
 
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # foreign keys
     category_id = db.Column(db.Integer, db.ForeignKey(

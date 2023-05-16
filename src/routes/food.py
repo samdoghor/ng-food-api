@@ -11,7 +11,7 @@ FoodBlueprint.route("/foods/<int:product_id>",
                     methods=['GET'])(FoodResource.read_one)
 
 FoodBlueprint.route("/foods/<int:product_id>",
-                    methods=["PUT"])(FoodResource.update_product)
+                    methods=["PUT"])(FoodResource.update)
 
 FoodBlueprint.route("/foods/<int:product_id>",
                     methods=["DELETE"])(FoodResource.delete)

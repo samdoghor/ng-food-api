@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flasgger import Swagger
 
+
 from models import db
 import config
 import routes
@@ -39,6 +40,6 @@ for blueprint in vars(routes).values():
 
 # run
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     server.debug = config.DEBUG
     server.run(host=config.HOST, port=config.PORT)

@@ -2,6 +2,7 @@
 
 from datetime import datetime
 
+
 from . import db
 
 # model
@@ -16,9 +17,9 @@ class CategoryModel(db.Model):
     name = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
 
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
-        db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # relationships
     foods = db.relationship('Food', backref='categories', lazy=True)
