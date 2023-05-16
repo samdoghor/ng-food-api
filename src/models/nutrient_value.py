@@ -3,11 +3,12 @@
 from datetime import datetime
 
 from . import db
+from .abc import BaseModel, MetaBaseModel
 
 # model
 
 
-class NutrientValueModel(db.Model):
+class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     ''' This class defines nutrients e.g 700'''
 
     __tablename__ = 'nutrient_values'

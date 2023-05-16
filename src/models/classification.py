@@ -8,10 +8,10 @@ from .abc import BaseModel, MetaBaseModel
 # model
 
 
-class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
-    ''' This class defines categories in which the food falls under e.g Cereal '''
+class ClassificationModel(db.Model, BaseModel, metaclass=MetaBaseModel):
+    ''' This class defines classification in which the food falls under e.g Food Group '''
 
-    __tablename__ = 'categories'
+    __tablename__ = 'classifications'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), unique=True, nullable=False)
@@ -20,9 +20,6 @@ class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    # relationships
-    foods = db.relationship('Food', backref='categories', lazy=True)
 
     def __repr__(self):
         return f'Category(id={self.id}, name={self.name})'

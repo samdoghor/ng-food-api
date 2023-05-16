@@ -2,12 +2,14 @@
 
 from datetime import datetime
 
+from .abc import BaseModel, MetaBaseModel
+
 from . import db
 
 # model
 
 
-class NutrientModel(db.Model):
+class NutrientModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     ''' This class defines nutrients e.g Vit. A '''
 
     __tablename__ = 'nutrients'

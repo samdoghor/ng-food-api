@@ -3,11 +3,12 @@
 from datetime import datetime
 
 from . import db
+from .abc import BaseModel, MetaBaseModel
 
 # model
 
 
-class FoodModel(db.Model):
+class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     ''' This class defines the Food Model e.g Rice '''
 
     __tablename__ = 'foods'

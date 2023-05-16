@@ -3,11 +3,12 @@
 from datetime import datetime
 
 from . import db
+from .abc import BaseModel, MetaBaseModel
 
 # model
 
 
-class TribeModel(db.Model):
+class TribeModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     ''' This class defines tribes in which the food could have names in e.g Urhobo '''
 
     __tablename__ = 'tribes'

@@ -3,11 +3,12 @@
 from datetime import datetime
 
 from . import db
+from .abc import BaseModel, MetaBaseModel
 
 # model
 
 
-class LocalFoodNameModel(db.Model):
+class LocalFoodNameModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     ''' This class defines local name for the foods e.g Rosu (Rice) '''
 
     __tablename__ = 'local_food_names'
