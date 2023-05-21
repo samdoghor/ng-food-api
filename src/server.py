@@ -2,9 +2,11 @@
 Module Name: server.py
 ===========
 
-This module is responsible for setting up and running the Nigeria Food Database API server.
+This module is responsible for setting up and running the Nigeria Food
+Database API server.
 
-It imports necessary modules, configures the server, and defines routes and endpoints for the API.
+It imports necessary modules, configures the server, and defines routes and
+endpoints for the API.
 
 """
 
@@ -37,7 +39,7 @@ Swagger(server, config=swagger_config)
 
 server.debug = config.DEBUG
 server.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
-server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
+server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS  # noqa: E501
 db.init_app(server)
 db.app = server
 migrate = Migrate(server, db)

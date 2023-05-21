@@ -1,9 +1,11 @@
 """
 Module Name: food.py
 
-This module defines the FoodBlueprint, which is a Flask Blueprint for managing food resources.
+This module defines the FoodBlueprint, which is a Flask Blueprint for managing
+food resources.
 
-The FoodBlueprint provides routes for creating, reading, updating, and deleting food resources using the FoodResource class.
+The FoodBlueprint provides routes for creating, reading, updating, and
+deleting food resources using the FoodResource class.
 
 Example Usage:
 --------------
@@ -37,14 +39,3 @@ FoodBlueprint = Blueprint("food", __name__)
 # routes
 
 FoodBlueprint.route("/foods", methods=['POST'])(FoodResource.create)
-
-FoodBlueprint.route("/foods", methods=['GET'])(FoodResource.read_all)
-
-FoodBlueprint.route("/foods/<int:product_id>",
-                    methods=['GET'])(FoodResource.read_one)
-
-FoodBlueprint.route("/foods/<int:product_id>",
-                    methods=["PUT"])(FoodResource.update)
-
-FoodBlueprint.route("/foods/<int:product_id>",
-                    methods=["DELETE"])(FoodResource.delete)

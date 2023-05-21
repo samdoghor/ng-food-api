@@ -12,6 +12,8 @@ mysql-connector-python = "*"
 flasgger = "==0.9.7b2"
 flask-migrate = "*"
 flask = "*"
+pyyaml = "*"
+flake8 = "*"
 
 [dev-packages]
 
