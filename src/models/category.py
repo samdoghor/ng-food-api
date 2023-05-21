@@ -1,10 +1,13 @@
 """
 Module Name: category.py
 
-This module defines the CategoryModel class, representing categories in which the food falls under (e.g., Cereal).
+This module defines the CategoryModel class, representing categories in which
+the food falls under (e.g., Cereal).
 
-The CategoryModel class is a SQLAlchemy model that extends the BaseModel and uses the MetaBaseModel metaclass.
-It provides database columns for storing category information, such as name, description, and timestamps.
+The CategoryModel class is a SQLAlchemy model that extends the BaseModel and
+uses the MetaBaseModel metaclass.
+It provides database columns for storing category information, such as name,
+description, and timestamps.
 It also defines relationships with the FoodModel model.
 
 Example Usage:
@@ -34,7 +37,9 @@ from .abc import BaseModel, MetaBaseModel
 
 
 class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
-    ''' This class defines categories in which the food falls under e.g Cereal '''
+
+    """ This class defines categories in which the food falls under e.g
+    Cereal """
 
     __tablename__ = 'categories'
 
@@ -43,8 +48,7 @@ class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     description = db.Column(db.String())
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(
-        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
         return f'Category(id={self.id}, name={self.name})'

@@ -1,3 +1,4 @@
 {
-  "isort.check": true
+  "isort.check": true,
+  "editor.wordWrap": "on"
 }

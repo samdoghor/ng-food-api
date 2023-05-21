@@ -1,9 +1,11 @@
 """
 Module Name: category.py
 
-This module defines the CategoryBlueprint, which is a Flask Blueprint for managing categories.
+This module defines the CategoryBlueprint, which is a Flask Blueprint for
+managing categories.
 
-The CategoryBlueprint provides routes for creating, reading, updating, and deleting category resources using the CategoryResource class.
+The CategoryBlueprint provides routes for creating, reading, updating, and
+deleting category resources using the CategoryResource class.
 
 Example Usage:
 --------------
@@ -42,11 +44,5 @@ CategoryBlueprint.route(
 CategoryBlueprint.route(
     "/categories", methods=['GET'])(CategoryResource.read_all)
 
-CategoryBlueprint.route("/categories/<int:product_id>",
-                        methods=['GET'])(CategoryResource.read_one)
-
-CategoryBlueprint.route("/categories/<int:product_id>",
-                        methods=["PUT"])(CategoryResource.update)
-
-CategoryBlueprint.route("/categories/<int:product_id>",
-                        methods=["DELETE"])(CategoryResource.delete)
+CategoryBlueprint.route(
+    "/categories/<int:id>", methods=['GET'])(CategoryResource.read_one)

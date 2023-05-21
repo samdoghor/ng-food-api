@@ -1,10 +1,13 @@
 """
 Module Name: nutrient_value.py
 
-This module defines the NutrientValueModel class, representing nutrient values for food items (e.g., 700).
+This module defines the NutrientValueModel class, representing nutrient values
+for food items (e.g., 700).
 
-The NutrientValueModel class is a SQLAlchemy model that extends the BaseModel and uses the MetaBaseModel metaclass.
-It provides database columns for storing nutrient value information, such as quantity and timestamps.
+The NutrientValueModel class is a SQLAlchemy model that extends the BaseModel
+and uses the MetaBaseModel metaclass.
+It provides database columns for storing nutrient value information, such as
+quantity and timestamps.
 It also defines relationships with the NutrientModel and FoodModel models.
 
 Example Usage:
@@ -42,8 +45,7 @@ class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     quantity = db.Column(db.Integer, nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(
-        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # foreign keys
     nutrient_id = db.Column(db.Integer, db.ForeignKey(

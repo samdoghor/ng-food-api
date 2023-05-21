@@ -1,15 +1,19 @@
 """
 Module Name: food.py
 
-This module defines the FoodResource class, which is a Flask-RESTful resource for managing food items.
+This module defines the FoodResource class, which is a Flask-RESTful resource
+for managing food items.
 
-The FoodResource class provides CRUD operations (create, read, update, delete) for the FoodModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the flasgger library for Swagger API documentation.
+The FoodResource class provides CRUD operations (create, read, update, delete)
+for the FoodModel class.
+It utilizes the Flask-RESTful library for creating a RESTful API, and the
+flasgger library for Swagger API documentation.
 
 Example Usage:
 --------------
 # Creating a new food item
-food = FoodModel(name="Rice", scientific_name="Oryza sativa", description="A staple food in many cultures")
+food = FoodModel(name="Rice", scientific_name="Oryza sativa", description="A
+staple food in many cultures")
 food.save()
 
 # Retrieving all food items
@@ -34,30 +38,10 @@ from models import FoodModel
 
 
 class FoodResource(Resource):
-    """ """
+
+    """ This Resource works all CRUD operations on Foods """
 
     @staticmethod
+    @swag_from("../swagger/food/create.yml")
     def create():
-        """ """
-        foods = FoodModel.query.all()
-
-    @staticmethod
-    @swag_from("../swagger/food/read_all.yml")
-    def read_all():
-        """ """
-        foods = FoodModel.query.all()
-
-    @staticmethod
-    def read_one():
-        """ """
-        foods = FoodModel.query.all()
-
-    @staticmethod
-    def update():
-        """ """
-        foods = FoodModel.query.all()
-
-    @staticmethod
-    def delete():
-        """ """
-        foods = FoodModel.query.all()
+        """ This method creates foods """
