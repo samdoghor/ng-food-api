@@ -1,0 +1,13 @@
+# About Nigeria Food Database APIs
+
+The Nigerian Food Database API is a powerful tool designed to provide developers with access to a comprehensive collection of information about various Nigerian dishes. By utilizing this RESTful API, developers can seamlessly integrate data on ingredients, nutritional value, and other pertinent details into their food-related applications. The API is built using Flask-RESTful, a framework that allows for the creation of robust and scalable APIs, and leverages PostgreSQL, a popular and reliable open-source relational database management system.
+
+One of the key features of the Nigerian Food Database API is its extensive database of ingredients. It offers a wide range of ingredients commonly used in Nigerian cuisine, including vegetables, meats, spices, grains, and more. Each ingredient entry contains detailed information such as the name, description, nutritional composition, and potential health benefits. This wealth of information empowers developers to create applications that promote healthier eating habits or assist users in making informed dietary choices.
+
+In addition to ingredient data, the API also provides comprehensive nutritional information for each dish. This data includes macronutrient and micronutrient breakdowns, such as the amount of protein, carbohydrates, fats, vitamins, and minerals present in a particular dish. This feature is particularly useful for developers creating fitness or nutrition applications, as it allows them to calculate and monitor the nutritional value of meals based on the ingredients used.
+
+Moreover, the Nigerian Food Database API offers a search functionality that enables developers to retrieve specific dishes based on various criteria. Whether a user is looking for vegetarian or gluten-free options, traditional Nigerian dishes, or dishes from specific regions or ethnic groups, the API allows for easy filtering and retrieval of relevant information.
+
+The API also provides endpoints for dish categories, such as soups, stews, rice dishes, snacks, desserts, and more. Developers can access this categorization to enhance the browsing experience within their applications or create specialized features that cater to specific dish types.
+
+By utilizing the Nigerian Food Database API, developers can contribute to promoting Nigerian cuisine, fostering cultural appreciation, and encouraging healthier eating habits. Whether building recipe apps, meal planners, dietary trackers, or platforms for culinary exploration, this API serves as a valuable resource for incorporating Nigerian food information into various applications.

@@ -46,7 +46,7 @@ from utils import parse_params
 
 class CategoryResource(Resource):
 
-    """Resource for managing categories"""
+    """Resource for managing food categories"""
 
     @staticmethod
     @parse_params(
@@ -55,20 +55,10 @@ class CategoryResource(Resource):
         Argument("description", location="json", required=True,
                  help="The short description of the category.")
     )
-    @swag_from("../swagger/category/create.yml")
     def create(name, description):
         """Create a new category"""
 
         try:
-            categories = CategoryModel.query.filter_by(name=name)
-
-            if categories:
-                return {
-                    'Code': 409,
-                    'Code Type': 'Client errors',
-                    'Message': f'{name} category already exist'
-                }, 409
-
             new_category = CategoryModel(name=name, description=description)
             new_category.save()
 
@@ -77,6 +67,7 @@ class CategoryResource(Resource):
             abort(500)
 
     @staticmethod
+    @swag_from("../swagger/category/read_all.yml")
     def read_all():
         """ Retrieves all categories """
 
@@ -87,7 +78,7 @@ class CategoryResource(Resource):
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': 'No category was found'
+                    'Message': 'No category was not found'
                 }, 404
 
             data = []
@@ -108,30 +99,99 @@ class CategoryResource(Resource):
             abort(500)
 
     @staticmethod
+    @swag_from("../swagger/category/read_one.yml")
     def read_one(id):
-        """ Retrieves all categories """
+        """ Retrieves one category by id """
 
         try:
             category = CategoryModel.query.filter_by(id=id).first()
 
-            if not id:
+            if not category:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': 'That category was found'
+                    'Message': f'The category with id {id} was not found'
                 }, 404
 
-            if id:
-                data = {
-                    'name': category.name,
-                    'description': category.description
-                }
+            data = {
+                'name': category.name,
+                'description': category.description
+            }
 
+            return {
+                'Code': 200,
+                'Code Type': 'Success',
+                'Data': data
+            }, 200
+
+        except Exception:
+            abort(500)
+
+    @staticmethod
+    @parse_params(
+        Argument("name", location="json", required=True,
+                 help="The name of the category."),
+        Argument("description", location="json", required=True,
+                 help="The short description of the category.")
+    )
+    @staticmethod
+    def update(id, **args):
+        """ Update one category by id """
+
+        try:
+            category = CategoryModel.query.filter_by(id=id).first()
+
+            if not category:
                 return {
-                    'Code': 200,
-                    'Code Type': 'Success',
-                    'Data': data
-                }, 200
+                    'Code': 404,
+                    'Code Type': 'Client errors',
+                    'Message': f'The category with id {id} was not found'
+                }, 404
+
+            if 'name' in args and args['name'] is not None:
+                category.name = args['name']
+
+            if 'description' in args and args['description'] is not None:
+                category.description = args['description']
+
+            category.save()
+
+            data = {
+                'name': category.name,
+                'description': category.description
+            }
+
+            return {
+                'Code': 200,
+                'Code Type': 'Success',
+                'Data': data,
+                'Message': f'The category with id {id} was found and was updated successfully'
+            }, 200
+
+        except Exception:
+            abort(500)
+
+    @staticmethod
+    def delete(id):
+        """ Delete one category by id """
+
+        try:
+            category = CategoryModel.query.filter_by(id=id).first()
+
+            if not category:
+                return {
+                    'Code': 404,
+                    'Code Type': 'Client errors',
+                    'Message': f'The category with id {id} was not found'
+                }, 404
+
+            category.delete()
+
+            return {
+                'Code': 200,
+                'Code Type': 'Success',
+                'Message': f'The category with id {id} was found and was deleted successfuly'
+            }, 200
 
         except Exception:
             abort(500)
