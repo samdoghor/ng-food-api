@@ -46,3 +46,9 @@ CategoryBlueprint.route(
 
 CategoryBlueprint.route(
     "/categories/<int:id>", methods=['GET'])(CategoryResource.read_one)
+
+CategoryBlueprint.route(
+    "/categories/<int:id>", methods=['PUT'])(CategoryResource.update)
+
+CategoryBlueprint.route(
+    "/categories/<int:id>", methods=['DELETE'])(CategoryResource.delete)
