@@ -2,7 +2,7 @@
 Module Name: category.py
 
 This module defines the CategoryModel class, representing categories in which
-the food falls under (e.g., Cereal).
+the food falls under (e.g., Whole Grain).
 
 The CategoryModel class is a SQLAlchemy model that extends the BaseModel and
 uses the MetaBaseModel metaclass.
@@ -13,7 +13,7 @@ It also defines relationships with the FoodModel model.
 Example Usage:
 --------------
 # Creating a new category
-category = CategoryModel(name='Cereal', description='Breakfast cereals')
+category = CategoryModel(name='Whole Grain', description='Breakfast cereals')
 category.save()
 
 # Retrieving all categories
@@ -39,7 +39,7 @@ from .abc import BaseModel, MetaBaseModel
 class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     """ This class defines categories in which the food falls under e.g
-    Cereal """
+    Whole Grain """
 
     __tablename__ = 'categories'
 
@@ -49,6 +49,10 @@ class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
+
+    # foreign keys
+    group_id = db.Column(db.Integer, db.ForeignKey(
+        'groups.id'), nullable=False)
 
     def __repr__(self):
         return f'Category(id={self.id}, name={self.name})'

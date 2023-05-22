@@ -14,3 +14,4 @@ from .tribe import TribeModel
 from .local_food_name import LocalFoodNameModel
 from .food import FoodModel
 from .category import CategoryModel
+from .group import GroupModel
