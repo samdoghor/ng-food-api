@@ -53,16 +53,21 @@ class CategoryResource(Resource):
         Argument("name", location="json", required=True,
                  help="The name of the category."),
         Argument("description", location="json", required=True,
-                 help="The short description of the category.")
+                 help="The short description of the category."),
+        Argument("group_id", location="json", required=True,
+                 help="The group id to establish a relationship with category.")  # noqa E501
     )
-    def create(name, description):
+    def create(name, description, group_id):
         """Create a new category"""
 
         try:
-            new_category = CategoryModel(name=name, description=description)
+            new_category = CategoryModel(
+                name=name.capitalize(),
+                description=description,
+                group_id=group_id)
             new_category.save()
 
-            return {'Message': f'{name} Category created successfully'}, 200
+            return {'Message': f'{name} Category was created successfully'}, 200  # noqa E501
         except Exception:
             abort(500)
 
@@ -85,6 +90,7 @@ class CategoryResource(Resource):
 
             for cats in categories:
                 data.append({
+                    'id': cats.id,
                     'name': cats.name,
                     'description': cats.description
                 })
@@ -128,6 +134,45 @@ class CategoryResource(Resource):
             abort(500)
 
     @staticmethod
+    @swag_from("../swagger/category/read_one_name.yml")
+    def read_one_name(name):
+        """ Retrieves one category by category name """
+
+        try:
+            category = CategoryModel.query.filter((
+                CategoryModel.name == name.title()) | (
+                CategoryModel.name == name.capitalize()) | (
+                CategoryModel.name == name.lower()) | (
+                CategoryModel.name == name.upper())).first()
+
+            if not category:
+                return {
+                    'Code': 404,
+                    'Code Type': 'Client errors',
+                    'Message': f'The category {name} was not found'
+                }, 404
+
+            last_updated = category.updated_at
+
+            if last_updated is None:
+                last_updated = category.created_at
+
+            data = {
+                'name': category.name,
+                'description': category.description,
+                f'{name.lower()} was last_updated': last_updated.date()
+            }
+
+            return {
+                'Code': 200,
+                'Code Type': 'Success',
+                'Data': data
+            }, 200
+
+        except Exception:
+            abort(500)
+
+    @staticmethod
     @parse_params(
         Argument("name", location="json", required=True,
                  help="The name of the category."),
@@ -149,7 +194,8 @@ class CategoryResource(Resource):
                 }, 404
 
             if 'name' in args and args['name'] is not None:
-                category.name = args['name']
+                name = args['name']
+                category.name = name.capitalize()
 
             if 'description' in args and args['description'] is not None:
                 category.description = args['description']
@@ -165,7 +211,7 @@ class CategoryResource(Resource):
                 'Code': 200,
                 'Code Type': 'Success',
                 'Data': data,
-                'Message': f'The category with id {id} was found and was updated successfully'
+                'Message': f'The category with id {id} was found and was updated successfully'  # noqa E501
             }, 200
 
         except Exception:
@@ -190,7 +236,7 @@ class CategoryResource(Resource):
             return {
                 'Code': 200,
                 'Code Type': 'Success',
-                'Message': f'The category with id {id} was found and was deleted successfuly'
+                'Message': f'The category with id {id} was found and was deleted successfuly'  # noqa E501
             }, 200
 
         except Exception:
