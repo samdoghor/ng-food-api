@@ -16,7 +16,7 @@ Example Usage:
 group = GroupModel(name='Cereal', description='Breakfast cereals')
 group.save()
 
-# Retrieving all categories
+# Retrieving all groups
 categories = GroupModel.query.all()
 
 # Accessing group properties
