@@ -134,7 +134,7 @@ class CategoryResource(Resource):
             abort(500)
 
     @staticmethod
-    @swag_from("../swagger/category/read_one_name.yml")
+    # @swag_from("../swagger/category/read_one_name.yml")
     def read_one_name(name):
         """ Retrieves one category by category name """
 
