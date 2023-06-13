@@ -88,11 +88,11 @@ class FoodResource(Resource):
 
             data = []
 
-            for cats in foods:
+            for foos in foods:
                 data.append({
-                    'id': cats.id,
-                    'name': cats.name,
-                    'description': cats.description
+                    'id': foos.id,
+                    'name': foos.name,
+                    'description': foos.description
                 })
 
             return {
