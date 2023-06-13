@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  title: "Read Category by ID"
+  description: "Retrieves a specific category by ID"
+  version: "1.0.0"
+produces:
+  - "application/json"
+parameters:
+  - name: "id"
+    in: "path"
+    description: "The ID of the category to retrieve"
+    required: true
+    type: "integer"
+    format: "int64"
+responses:
+  200:
+    description: "Success"
+    schema:
+      type: "object"
+      properties:
+        Code:
+          type: "integer"
+          format: "int32"
+        Code Type:
+          type: "string"
+        Data:
+          type: "object"
+          properties:
+            name:
+              type: "string"
+              description: "The name of the category"
+            description:
+              type: "string"
+              description: "The short description of the category"

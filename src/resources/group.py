@@ -69,7 +69,7 @@ class GroupResource(Resource):
             abort(500)
 
     @staticmethod
-    # @swag_from("../swagger/group/read_all.yml")
+    @swag_from("../swagger/group/read_all.yml")
     def read_all():
         """ Retrieves all groups """
 
@@ -85,11 +85,11 @@ class GroupResource(Resource):
 
             data = []
 
-            for cats in groups:
+            for grus in groups:
                 data.append({
-                    'id': cats.id,
-                    'name': cats.name,
-                    'description': cats.description
+                    'id': grus.id,
+                    'name': grus.name,
+                    'description': grus.description
                 })
 
             return {
@@ -102,7 +102,7 @@ class GroupResource(Resource):
             abort(500)
 
     @staticmethod
-    # @swag_from("../swagger/group/read_one.yml")
+    @swag_from("../swagger/group/read_one.yml")
     def read_one(id):
         """ Retrieves one group by id """
 
