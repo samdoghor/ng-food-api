@@ -57,6 +57,8 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     # relationships
     nutrient_values = db.relationship(
         'NutrientValueModel', backref='foods', lazy=True)
+    origins = db.relationship(
+        'OriginModel', backref='foods', lazy=True)
 
     def __repr__(self):
         return f'Food(id={self.id}, name={self.name})'

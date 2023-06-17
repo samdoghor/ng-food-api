@@ -8,7 +8,7 @@ The CategoryModel class is a SQLAlchemy model that extends the BaseModel and
 uses the MetaBaseModel metaclass.
 It provides database columns for storing category information, such as name,
 description, and timestamps.
-It also defines relationships with the FoodModel model.
+It also defines relationships with the GroupModel model.
 
 Example Usage:
 --------------
