@@ -1,0 +1,11 @@
+flask-restful
+flask-sqlalchemy
+psycopg2
+python-dotenv
+mysql-connector-python
+flasgger
+flask-migrate
+flask
+pyyaml
+flake8
+

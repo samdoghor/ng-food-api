@@ -1,9 +1,8 @@
 """
-Module Name: server.py
-===========
+## Module Name: server.py
 
-This module is responsible for setting up and running the Nigeria Food
-Database API server.
+This module is responsible for setting up and running the Nigeria Food API
+server.
 
 It imports necessary modules, configures the server, and defines routes and
 endpoints for the API.

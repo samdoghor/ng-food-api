@@ -1,5 +1,5 @@
 """
-Module Name: group.py
+## Module Name: group.py
 
 This module defines the GroupResource class, which is a Flask-RESTful
 resource for managing groups.
@@ -9,18 +9,26 @@ delete) for the GroupModel class.
 It utilizes the Flask-RESTful library for creating a RESTful API, and the
 flasgger library for Swagger API documentation.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new group
+
+### Creating a new group
+
 group = GroupModel(name="Fruits and Vegetables", description="Food group for
+
 Fruits and Vegetables") group.save()
 
-# Retrieving all groups
+### Retrieving all groups
+
 groups = GroupModel.query.all()
 
-# Accessing group properties
+### Accessing group properties
+
 for group in groups:
+
     print(group.name)
+
     print(group.description)
 
 """

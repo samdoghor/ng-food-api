@@ -1,34 +1,84 @@
-swagger: "2.0"
-info:
-  title: "Read Category by ID"
-  description: "Retrieves a specific category by ID"
-  version: "1.0.0"
-produces:
-  - "application/json"
+title: Get a product's detail
+description: Returns a product's key information
+tags:
+  - Food Categories
+operationId: getproduct
+
 parameters:
-  - name: "id"
-    in: "path"
-    description: "The ID of the category to retrieve"
-    required: true
-    type: "integer"
-    format: "int64"
+        - name: productID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
 responses:
   200:
-    description: "Success"
-    schema:
-      type: "object"
-      properties:
-        Code:
-          type: "integer"
-          format: "int32"
-        Code Type:
-          type: "string"
-        Data:
-          type: "object"
+    description: Product was successfully retrieved base on ID
+    content:
+      application/json:
+        schema:
+          type: object
           properties:
-            name:
-              type: "string"
-              description: "The name of the category"
-            description:
-              type: "string"
-              description: "The short description of the category"
+            id:
+              type: integer
+            title:
+              type: string
+            price:
+              type: string
+            short_desc:
+              type: string
+            seller:
+              type: string
+            product_category:
+              type: string
+            brand:
+              type: string
+          required:
+            - id
+            - title
+            - price
+            - short_desc
+            - seller
+            - product_category
+            - brand
+          example:
+            id: 1
+            title: Casio MTP-VD02G-1EUDF
+            price: ₦35,000
+            short_desc: This classic timepiece is in a sporty design that is streamlined for casual sophistication. The minimalist analogue design features a handy date display at the 6 o’clock position. Water resistance for daily use frees you from worry when washing up or out in the rain.
+            seller: Margaret Blinks
+            product_category: Fashion
+            brand: Casio
+  401:
+    description: Not authenticated
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Not authenticated
+  403:
+    description: Access token does not have the required scope
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Access token does not have the required scope
+
+  404:
+    description: Product not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: The Product was not found
+
+security:
+  - implicit:
+      - get

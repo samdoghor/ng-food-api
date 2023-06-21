@@ -1,29 +1,46 @@
-swagger: "2.0"
-info:
-  title: "Read All Categories"
-  description: "Retrieves all categories"
-  version: "1.0.0"
-produces:
-  - "application/json"
+title: Get a food group's detail
+description: Returns a food group's key information
+tags:
+  - Food Groups
+operationId: getonegroup
+
+parameters:
+        - name: groupID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
 responses:
   200:
-    description: "Success"
-    schema:
-      type: "object"
-      properties:
-        Code:
-          type: "integer"
-          format: "int32"
-        Code Type:
-          type: "string"
-        Data:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              name:
-                type: "string"
-                description: "The name of the category"
-              description:
-                type: "string"
-                description: "The short description of the category"
+    description: Group was successfully retrieved base on ID
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+
+          required:
+            - id
+
+          example:
+            id: 1
+            name: Fruits and vegetables
+            description: Fruits and vegetables are vital plant foods, rich in nutrients, vitamins, fiber, and antioxidants. They promote good health and lower the risk of chronic diseases when included in a balanced diet.
+
+  404:
+    description: Group not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: The group was not found

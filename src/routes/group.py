@@ -1,5 +1,5 @@
 """
-Module Name: group.py
+## Module Name: group.py
 
 This module defines the Grouplueprint, which is a Flask Blueprint for
 managing groups.
@@ -7,21 +7,28 @@ managing groups.
 The GroupBlueprint provides routes for creating, reading, updating, and
 deleting group resources using the GroupResource class.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new group
+
+### Creating a new group
+
 POST /groups
 
-# Retrieving all groups
+### Retrieving all groups
+
 GET /groups
 
-# Retrieving a specific group
+### Retrieving a specific group
+
 GET /groups/<group_id>
 
-# Updating a group
+### Updating a group
+
 PUT /groups/<group_id>
 
-# Deleting a group
+### Deleting a group
+
 DELETE /groups/<group_id>
 
 """
