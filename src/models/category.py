@@ -1,5 +1,5 @@
 """
-Module Name: category.py
+## Module Name: category.py
 
 This module defines the CategoryModel class, representing categories in which
 the food falls under (e.g., Whole Grain).
@@ -10,18 +10,26 @@ It provides database columns for storing category information, such as name,
 description, and timestamps.
 It also defines relationships with the GroupModel model.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new category
+
+### Creating a new category
+
 category = CategoryModel(name='Whole Grain', description='Breakfast cereals')
+
 category.save()
 
-# Retrieving all categories
+### Retrieving all categories
+
 categories = CategoryModel.query.all()
 
-# Accessing category properties
+### Accessing category properties
+
 for category in categories:
+
     print(category.name)
+
     print(category.foods)
 
 """

@@ -1,5 +1,5 @@
 """
-Module Name: tribe.py
+## Module Name: tribe.py
 
 This module defines the TribeModel class, representing tribes in which food
 could have names (e.g., Urhobo).
@@ -10,20 +10,29 @@ It provides database columns for storing tribe information, such as tribe name,
 description, and location.
 It also defines a relationship with the LocalFoodNameModel model.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new tribe
+
+### Creating a new tribe
+
 tribe = TribeModel(tribe="Urhobo", description="A tribe in Nigeria",
 location="Delta State")
+
 tribe.save()
 
-# Retrieving all tribes
+### Retrieving all tribes
+
 tribes = TribeModel.query.all()
 
-# Accessing tribe properties
+### Accessing tribe properties
+
 for tribe in tribes:
+
     print(tribe.tribe)
+
     print(tribe.description)
+
     print(tribe.location)
 
 """

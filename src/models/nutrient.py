@@ -1,5 +1,5 @@
 """
-Module Name: nutrient.py
+## Module Name: nutrient.py
 
 This module defines the NutrientModel class, representing nutrients (e.g.,
 Vit. A).
@@ -10,21 +10,31 @@ It provides database columns for storing nutrient information, such as name,
 short name, value unit, and whether it is essential.
 It also defines a relationship with the NutrientValueModel model.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new nutrient
+
+### Creating a new nutrient
+
 nutrient = NutrientModel(name="Vitamin A", short_name="Vit. A",
 value_unit="mg", is_essential=True)
+
 nutrient.save()
 
-# Retrieving all nutrients
+### Retrieving all nutrients
+
 nutrients = NutrientModel.query.all()
 
-# Accessing nutrient properties
+### Accessing nutrient properties
+
 for nutrient in nutrients:
+
     print(nutrient.name)
+
     print(nutrient.short_name)
+
     print(nutrient.value_unit)
+
     print(nutrient.is_essential)
 
 """
