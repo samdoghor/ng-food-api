@@ -1,5 +1,5 @@
 """
-Module Name: category.py
+## Module Name: category.py
 
 This module defines the CategoryResource class, which is a Flask-RESTful
 resource for managing categories.
@@ -9,18 +9,26 @@ delete) for the CategoryModel class.
 It utilizes the Flask-RESTful library for creating a RESTful API, and the
 flasgger library for Swagger API documentation.
 
-Example Usage:
---------------
-# Creating a new category
-category = CategoryModel(name="Cereal", description="Food category for
-cereals") category.save()
+## Example Usage:
 
-# Retrieving all categories
+--------------
+
+### Creating a new category
+category = CategoryModel(name="Cereal", description="Food category for
+cereals")
+
+category.save()
+
+### Retrieving all categories
+
 categories = CategoryModel.query.all()
 
-# Accessing category properties
+### Accessing category properties
+
 for category in categories:
+
     print(category.name)
+
     print(category.description)
 
 """

@@ -1,29 +1,39 @@
-swagger: "2.0"
-info:
-  title: "Read All Categories"
-  description: "Retrieves all categories"
-  version: "1.0.0"
-produces:
-  - "application/json"
+title: Get all food groups
+description: Return all food groups information
+tags:
+  - Food Groups
+operationId: getallgroups
+
 responses:
   200:
-    description: "Success"
-    schema:
-      type: "object"
-      properties:
-        Code:
-          type: "integer"
-          format: "int32"
-        Code Type:
-          type: "string"
-        Data:
-          type: "array"
+    description: The food groups information were successfully retrieved
+    content:
+      application/json:
+        schema:
+          type: array
           items:
-            type: "object"
+            type: object
             properties:
               name:
-                type: "string"
-                description: "The name of the category"
+                type: string
+                description: The food group's name
               description:
-                type: "string"
-                description: "The short description of the category"
+                type: string
+                description: The food group's description
+              
+            example:
+              "data":
+                [
+                  { 
+                  "name": "Fruits and vegetables", 
+                  "description": "Fruits and vegetables are vital plant foods, rich in nutrients, vitamins, fiber, and antioxidants. They promote good health and lower the risk of chronic diseases when included in a balanced diet." 
+                  },
+                  { 
+                  "name": "Grains and cereals", 
+                  "description": "Grains and cereals are plant-based food sources that provide carbohydrates, fiber, and various essential nutrients, serving as staples in many diets worldwide." 
+                  },
+                  { 
+                  "name": "Dairy products", 
+                  "description": "Dairy products are derived from milk and include items such as milk, cheese, butter, and yogurt. They are rich in calcium, protein, and other essential nutrients, making them important for bone health and overall nutrition." 
+                  },
+                ]

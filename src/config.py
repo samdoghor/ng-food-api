@@ -1,9 +1,11 @@
 """
-Module Name: config.py
+## Module Name: config.py
 
-This module contains the configuration settings for the Nigeria Food Database API.
+This module contains the configuration settings for the Nigeria Food Database
+API.
 
-It provides environment variables and settings related to the database, server, and debugging.
+It provides environment variables and settings related to the database,
+server, and debugging.
 """
 
 # imports
@@ -23,13 +25,13 @@ dbName = os.getenv('DB_NAME')
 DEBUG = True
 
 # database (MYSQL)
-SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'
+SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'  # noqa
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # server
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ENVIRONMENT = os.getenv("ENVIRONMENT") == "DEV"
-APPLICATION_ROOT = os.getenv("API_APPLICATION_ROOT", "/api")
+APPLICATION_ROOT = os.getenv("API_APPLICATION_ROOT", "/v1/api")
 HOST = os.getenv("APPLICATION_HOST")
 PORT = int(os.getenv("APPLICATION_PORT", "3000"))
