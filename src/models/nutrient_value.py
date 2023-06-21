@@ -1,5 +1,5 @@
 """
-Module Name: nutrient_value.py
+## Module Name: nutrient_value.py
 
 This module defines the NutrientValueModel class, representing nutrient values
 for food items (e.g., 700).
@@ -10,18 +10,26 @@ It provides database columns for storing nutrient value information, such as
 quantity and timestamps.
 It also defines relationships with the NutrientModel and FoodModel models.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new nutrient value
+
+### Creating a new nutrient value
+
 nutrient_value = NutrientValueModel(quantity=700, nutrient_id=1, food_id=1)
+
 nutrient_value.save()
 
-# Retrieving all nutrient values
+### Retrieving all nutrient values
+
 nutrient_values = NutrientValueModel.query.all()
 
-# Accessing nutrient value properties
+### Accessing nutrient value properties
+
 for nutrient_value in nutrient_values:
+
     print(nutrient_value.quantity)
+
     print(nutrient_value.nutrients)
 
 """
@@ -55,4 +63,4 @@ class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
         'foods.id'), nullable=False)
 
     def __repr__(self):
-        return f'NutrientValue(name={self.nutrients.name},id={self.id}, quantity={self.quantity})'
+        return f'NutrientValue(name={self.nutrients.name},id={self.id}, quantity={self.quantity})'  # noqa

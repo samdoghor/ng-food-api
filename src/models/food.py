@@ -1,5 +1,5 @@
 """
-Module Name: food.py
+## Module Name: food.py
 
 This module defines the FoodModel class, representing food items such as Rice.
 
@@ -10,19 +10,27 @@ scientific name, description, and timestamps.
 It also defines relationships with the CategoryModel and NutrientValueModel
 models.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new food item
+
+### Creating a new food item
+
 food = FoodModel(name='Rice', scientific_name='Oryza sativa', description='
 Staple food grain')
+
 food.save()
 
-# Retrieving all food items
+### Retrieving all food items
+
 foods = FoodModel.query.all()
 
-# Accessing food properties
+### Accessing food properties
+
 for food in foods:
+
     print(food.name)
+
     print(food.nutrient_values)
 
 """

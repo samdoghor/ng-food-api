@@ -1,5 +1,5 @@
 """
-Module Name: group.py
+## Module Name: group.py
 
 This module defines the GroupModel class, representing group in which
 the food categories falls under (e.g., Cereal and Grains).
@@ -10,18 +10,26 @@ It provides database columns for storing group information, such as name,
 description, and timestamps.
 It also defines relationships with the FoodModel model.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new group
+
+### Creating a new group
+
 group = GroupModel(name='Cereal', description='Breakfast cereals')
+
 group.save()
 
-# Retrieving all groups
+### Retrieving all groups
+
 categories = GroupModel.query.all()
 
-# Accessing group properties
+### Accessing group properties
+
 for group in groups:
+
     print(group.name)
+
     print(group.foods)
 
 """

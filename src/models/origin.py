@@ -1,5 +1,5 @@
 """
-Module Name: origin.py
+## Module Name: origin.py
 
 This module defines the OriginModel class, representing origins in which
 the food were first cited (e.g., Nigeria).
@@ -10,18 +10,26 @@ It provides database columns for storing origin information, such as country,
  and timestamps.
 It also defines relationships with the FoodModel model.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new origin
+
+### Creating a new origin
+
 origin = OriginModel(country='Nigeria', description='Origin')
+
 origin.save()
 
-# Retrieving all origins
+### Retrieving all origins
+
 origins = OriginModel.query.all()
 
-# Accessing origin properties
+### Accessing origin properties
+
 for origin in origins:
+
     print(origin.name)
+
     print(origin.foods)
 
 """

@@ -1,5 +1,5 @@
 """
-Module Name: food.py
+## Module Name: food.py
 
 This module defines the FoodResource class, which is a Flask-RESTful
 resource for managing foods.
@@ -9,18 +9,27 @@ delete) for the FoodModel class.
 It utilizes the Flask-RESTful library for creating a RESTful API, and the
 flasgger library for Swagger API documentation.
 
-Example Usage:
---------------
-# Creating a new food
-food = FoodModel(name="Cereal", description="Food food for
-cereals") food.save()
+## Example Usage:
 
-# Retrieving all foods
+--------------
+
+### Creating a new food
+
+food = FoodModel(name="Cereal", description="Food food for
+cereals")
+
+food.save()
+
+### Retrieving all foods
+
 foods = FoodModel.query.all()
 
-# Accessing food properties
+### Accessing food properties
+
 for food in foods:
+
     print(food.name)
+
     print(food.description)
 
 """

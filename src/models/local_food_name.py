@@ -1,5 +1,5 @@
 """
-Module Name: local_food_name.py
+## Module Name: local_food_name.py
 
 This module defines the LocalFoodNameModel class, representing local names for
 food items (e.g., Rosu (Rice)).
@@ -10,18 +10,26 @@ It provides database columns for storing local food name information, such as
 name and timestamps.
 It also defines relationships with the TribeModel and FoodModel models.
 
-Example Usage:
+## Example Usage:
+
 --------------
-# Creating a new local food name
+
+### Creating a new local food name
+
 local_food_name = LocalFoodNameModel(name='Rosu (Rice)', tribe_id=1, food_id=1)
+
 local_food_name.save()
 
-# Retrieving all local food names
+### Retrieving all local food names
+
 local_food_names = LocalFoodNameModel.query.all()
 
-# Accessing local food name properties
+### Accessing local food name properties
+
 for local_food_name in local_food_names:
+
     print(local_food_name.name)
+
     print(local_food_name.food)
 
 """
