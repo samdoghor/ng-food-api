@@ -17,9 +17,9 @@ from flask_restful import Api
 from flasgger import Swagger
 
 
-from models import db
-import config
-import routes
+from src.models import db
+from src import config
+from src import routes
 
 # instantiation/configuration
 

@@ -32,8 +32,8 @@ from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
-from models import NutrientModel
-from utils import parse_params
+from src.models import NutrientModel
+from src.utils import parse_params
 
 # resources
 

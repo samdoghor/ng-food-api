@@ -20,13 +20,22 @@ dbPassword = os.getenv('DB_PASSWORD')
 dbHost = os.getenv('DB_HOST')
 dbPort = os.getenv('DB_PORT')
 dbName = os.getenv('DB_NAME')
+dbNameTest = os.getenv('DB_NAME_TEST')
 
 # enable debug mode
+
+
 DEBUG = True
 
-# database (MYSQL)
+# database (PostgreSQl)
+
 SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'  # noqa
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# test database (PostgreSQl)
+
+test_db_name = dbNameTest
+test_db_url = f'{dbUsername}:{dbPassword}@{dbHost}:{dbPort}'
 
 # server
 
