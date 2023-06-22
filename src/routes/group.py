@@ -37,7 +37,7 @@ DELETE /groups/<group_id>
 
 from flask import Blueprint
 
-from resources import GroupResource
+from src.resources import GroupResource
 
 # configuration
 
