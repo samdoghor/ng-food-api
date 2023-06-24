@@ -54,6 +54,7 @@ class OriginModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     id = db.Column(db.Integer, primary_key=True)
     country = db.Column(db.String(), unique=True, nullable=False)
     short_code = db.Column(db.String())
+    flag = db.Column(db.String())
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)

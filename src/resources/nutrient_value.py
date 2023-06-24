@@ -30,8 +30,8 @@ from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
-from src.models import NutrientValueModel
-from src.utils import parse_params
+from models import NutrientValueModel
+from utils import parse_params
 
 # resources
 
@@ -44,7 +44,7 @@ from src.utils import parse_params
 
 class NutrientValueResource(Resource):
 
-    """Resource for managing food nutrients"""
+    """Resource for managing food nutrients values """
 
     @staticmethod
     @parse_params(
@@ -55,29 +55,32 @@ class NutrientValueResource(Resource):
         Argument("nutirent_id", location="json", required=True,
                  help="The nutrient id to establish a relationship with nutrient value.")  # noqa E501
     )
-    def create(name, description, group_id):
+    def create(quantity, food_id, nutrient_id):
         """Create a new nutrient value"""
 
         try:
             new_nutrient_value = NutrientValueModel(
-                quantity=name.capitalize(),
+                quantity=quantity.capitalize(),
                 food_id=food_id,
                 nutrient_id=nutrient_id)
             new_nutrient_value.save()
 
-            return {'Message': f'{name} Nutrient value was created successfully'}, 200  # noqa E501
+            return {
+                'Message': 'Nutrient value was created successfully'
+                }, 200  # noqa E501
+
         except Exception:
             abort(500)
 
     @staticmethod
     @swag_from("../swagger/nutrient_value/read_all.yml")
     def read_all():
-        """ Retrieves all nutrients """
+        """ Retrieves all nutrients values """
 
         try:
-            nutrients_value = NutrientValueModel.query.all()
+            nutrient_value = NutrientValueModel.query.all()
 
-            if not nutrients_value:
+            if not nutrient_value:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
@@ -86,10 +89,12 @@ class NutrientValueResource(Resource):
 
             data = []
 
-            for nuts_valu in nutrients_value:
+            for nuts_vals in nutrient_value:
                 data.append({
-                    'id': nuts_valu.id,
-                    'quantity': nuts_valu.quantity,
+                    'id': nuts_vals.id,
+                    'quantity': nuts_vals.quantity,
+                    'nutrient_id': nuts_vals.nutrient_id,
+                    'food_id': nuts_vals.food_id,
                 })
 
             return {
@@ -107,57 +112,19 @@ class NutrientValueResource(Resource):
         """ Retrieves one nutrient value by id """
 
         try:
-            nutrient = NutrientValueModel.query.filter_by(id=id).first()
+            nutrient_value = NutrientValueModel.query.filter_by(id=id).first()
 
-            if not nutrient:
+            if not nutrient_value:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': f'The nutrient with id {id} was not found'
+                    'Message': f'The nutrient value with id {id} was not found'
                 }, 404
 
             data = {
-                'name': nutrient.name,
-                'description': nutrient.description
-            }
-
-            return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Data': data
-            }, 200
-
-        except Exception:
-            abort(500)
-
-    @staticmethod
-    # @swag_from("../swagger/nutrient/read_one_name.yml")
-    def read_one_name(name):
-        """ Retrieves one nutrient by nutrient name """
-
-        try:
-            nutrient = NutrientValueModel.query.filter((
-                NutrientValueModel.name == name.title()) | (
-                NutrientValueModel.name == name.capitalize()) | (
-                NutrientValueModel.name == name.lower()) | (
-                NutrientValueModel.name == name.upper())).first()
-
-            if not nutrient:
-                return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': f'The nutrient {name} was not found'
-                }, 404
-
-            last_updated = nutrient.updated_at
-
-            if last_updated is None:
-                last_updated = nutrient.created_at
-
-            data = {
-                'name': nutrient.name,
-                'description': nutrient.description,
-                f'{name.lower()} was last_updated': last_updated.date()
+                'quantity': nutrient_value.quanity,
+                'nutrient_id': nutrient_value.nutrient_id,
+                'food_id': nutrient_value.food_id
             }
 
             return {
@@ -171,44 +138,50 @@ class NutrientValueResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("name", location="json", required=True,
-                 help="The name of the nutrient."),
-        Argument("description", location="json", required=True,
-                 help="The short description of the nutrient.")
+        Argument("quantity", location="json", required=True,
+                 help="The quantity of the nutrient."),
+        Argument("food_id", location="json", required=True,
+                 help="The food id to establish a relationship with nutrient value."),  # noqa E501
+        Argument("nutirent_id", location="json", required=True,
+                 help="The nutrient id to establish a relationship with nutrient value.")  # noqa E501
     )
     @staticmethod
     def update(id, **args):
-        """ Update one nutrient by id """
+        """ Update one nutrient value by id """
 
         try:
-            nutrient = NutrientValueModel.query.filter_by(id=id).first()
+            nutrient_value = NutrientValueModel.query.filter_by(id=id).first()
 
-            if not nutrient:
+            if not nutrient_value:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': f'The nutrient with id {id} was not found'
+                    'Message': f'The nutrient value with id {id} was not found'
                 }, 404
 
-            if 'name' in args and args['name'] is not None:
-                name = args['name']
-                nutrient.name = name.capitalize()
+            if 'quantity' in args and args['quantity'] is not None:
+                quantity = args['quantity']
+                nutrient_value.quantity = quantity
 
-            if 'description' in args and args['description'] is not None:
-                nutrient.description = args['description']
+            if 'food_id' in args and args['food_id'] is not None:
+                nutrient_value.food_id = args['food_id']
 
-            nutrient.save()
+            if 'nutrient_id' in args and args['nutrient_id'] is not None:
+                nutrient_value.nutrient_id = args['nutrient_id']
+
+            nutrient_value.save()
 
             data = {
-                'name': nutrient.name,
-                'description': nutrient.description
+                'quantity': nutrient_value.quantity,
+                'food_id': nutrient_value.food_id,
+                'nutrient_id': nutrient_value.nutrient_id,
             }
 
             return {
                 'Code': 200,
                 'Code Type': 'Success',
                 'Data': data,
-                'Message': f'The nutrient with id {id} was found and was updated successfully'  # noqa E501
+                'Message': f'The nutrient value with id {id} was found and was updated successfully'  # noqa E501
             }, 200
 
         except Exception:
@@ -216,24 +189,24 @@ class NutrientValueResource(Resource):
 
     @staticmethod
     def delete(id):
-        """ Delete one nutrient by id """
+        """ Delete one nutrient value by id """
 
         try:
-            nutrient = NutrientValueModel.query.filter_by(id=id).first()
+            nutrient_value = NutrientValueModel.query.filter_by(id=id).first()
 
-            if not nutrient:
+            if not nutrient_value:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': f'The nutrient with id {id} was not found'
+                    'Message': f'The nutrient value with id {id} was not found'
                 }, 404
 
-            nutrient.delete()
+            nutrient_value.delete()
 
             return {
                 'Code': 200,
                 'Code Type': 'Success',
-                'Message': f'The nutrient with id {id} was found and was deleted successfully'  # noqa E501
+                'Message': f'The nutrient value with id {id} was found and was deleted successfully'  # noqa E501
             }, 200
 
         except Exception:

@@ -1,0 +1,84 @@
+title: Get all products
+description: Return all products information
+tags:
+  - Food Nutrients Value
+operationId: getproducts
+
+responses:
+  200:
+    description: The products information were successfully retrieved
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The products's title
+              price:
+                type: string
+                description: The products's price
+              short_desc:
+                type: string
+                description: The products's short description
+              seller:
+                type: string
+                description: The products's seller
+              product_category:
+                type: string
+                description: The products's category
+              brand:
+                type: string
+                description: The products's brand
+            example:
+              "data":
+                [
+                  { 
+                  "title": "32\" HiSense Smart Andriod TV", 
+                  "price": "₦80,000", 
+                  "description": "The Hisense 32\" Smart TV offers a compact and versatile entertainment experience. With its vibrant 32-inch display and smart features, including built-in streaming apps and connectivity options, it delivers high-quality visuals and easy access to a variety of content.", 
+                  "seller": "XYZ Electronics", 
+                  "product category": "Electronics", 
+                  "brand": "HiSense" 
+                  },
+                  { 
+                  "title": "HP Wireless Mouse", 
+                  "price": "₦4,000", 
+                  "description": "The HP Wireless Mouse is a reliable and ergonomic peripheral designed to enhance your computing experience. With its wireless connectivity, you can enjoy seamless cursor control without the hassle of tangled cords. It features precise tracking, comfortable grip, and long battery life, making it an excellent choice for productivity and convenience", 
+                  "seller": "ABC & Chuks Accessories", 
+                  "product category": "Computer Accessories", 
+                  "brand": "HP" 
+                  },
+                  { 
+                  "title": "Casio MTP-VD02G-1EUDF", 
+                  "price": "₦35,000", 
+                  "description": "This classic timepiece is in a sporty design that is streamlined for casual sophistication. The minimalist analogue design features a handy date display at the 6 o’clock position. Water resistance for daily use frees you from worry when washing up or out in the rain.", 
+                  "seller": "Margaret Blinks",
+                  "product category": "Fashion", 
+                  "brand": "Casio" 
+                  },
+                ]
+  401:
+    description: Not authenticated
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Not authenticated
+  403:
+    description: Access token does not have the required scope
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Access token does not have the required scope
+
+security:
+  - implicit:
+      - get
