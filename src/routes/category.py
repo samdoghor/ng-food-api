@@ -37,7 +37,7 @@ DELETE /categories/<category_id>
 
 from flask import Blueprint
 
-from src.resources import CategoryResource
+from resources import CategoryResource
 
 # configuration
 

@@ -40,8 +40,8 @@ from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
-from src.models import GroupModel
-from src.utils import parse_params
+from models import GroupModel
+from utils import parse_params
 
 # resources
 

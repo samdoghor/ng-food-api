@@ -32,8 +32,8 @@ from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
-from src.models import NutrientModel
-from src.utils import parse_params
+from models import NutrientModel
+from utils import parse_params
 
 # resources
 
@@ -61,13 +61,13 @@ class NutrientResource(Resource):
         """Create a new nutrient"""
 
         try:
-            new_category = NutrientModel(
+            new_nutrient = NutrientModel(
                 name=name.capitalize(),
                 description=description,
                 group_id=group_id)
-            new_category.save()
+            new_nutrient.save()
 
-            return {'Message': f'{name} Category was created successfully'}, 200  # noqa E501
+            return {'Message': f'{name} Nutrient was created successfully'}, 200  # noqa E501
         except Exception:
             abort(500)
 
