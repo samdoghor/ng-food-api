@@ -60,24 +60,24 @@ class TribeResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("name", location="json", required=True,
+        Argument("tribe", location="json", required=True,
                  help="The name of the tribe."),
         Argument("description", location="json", required=True,
                  help="The short description of the tribe."),
         Argument("country", location="json", required=True,
                  help="The country of the tribe.")
     )
-    def create(name, description, country):
+    def create(tribe, description, country):
         """Create a new tribe"""
 
         try:
             new_tribe = TribeModel(
-                name=name.capitalize(),
+                tribe=tribe.capitalize(),
                 description=description,
                 country=country)
             new_tribe.save()
 
-            return {'Message': f'{name} Tribe was created successfully'}, 200  # noqa E501
+            return {'Message': f'{tribe} Tribe was created successfully'}, 200  # noqa E501
         except Exception:
             abort(500)
 
@@ -101,7 +101,7 @@ class TribeResource(Resource):
             for tris in tribes:
                 data.append({
                     'id': tris.id,
-                    'name': tris.name,
+                    'tribe': tris.tribe,
                     'description': tris.description,
                     'country': tris.country
                 })
@@ -131,7 +131,7 @@ class TribeResource(Resource):
                 }, 404
 
             data = {
-                'name': tribe.name,
+                'tribe': tribe.tribe,
                 'description': tribe.description,
                 'country': tribe.country
             }
@@ -147,21 +147,21 @@ class TribeResource(Resource):
 
     @staticmethod
     # @swag_from("../swagger/tribe/read_one_name.yml")
-    def read_one_name(name):
+    def read_one_name(tribe):
         """ Retrieves one tribe by tribe name """
 
         try:
             tribe = TribeModel.query.filter((
-                TribeModel.name == name.title()) | (
-                TribeModel.name == name.capitalize()) | (
-                TribeModel.name == name.lower()) | (
-                TribeModel.name == name.upper())).first()
+                TribeModel.tribe == tribe.title()) | (
+                TribeModel.tribe == tribe.capitalize()) | (
+                TribeModel.tribe == tribe.lower()) | (
+                TribeModel.tribe == tribe.upper())).first()
 
             if not tribe:
                 return {
                     'Code': 404,
                     'Code Type': 'Client errors',
-                    'Message': f'The tribe {name} was not found'
+                    'Message': f'The tribe {tribe} was not found'
                 }, 404
 
             last_updated = tribe.updated_at
@@ -173,7 +173,7 @@ class TribeResource(Resource):
                 'name': tribe.name,
                 'description': tribe.description,
                 'country': tribe.country,
-                f'{name.lower()} was last_updated': last_updated.date()
+                f'{tribe.lower()} was last_updated': last_updated.date()
             }
 
             return {
