@@ -6,7 +6,55 @@ This module contains error handling configurations for the Nigeria Food API.
 """
 
 
+class BadRequest(Exception):
+    """ This class represents a 400 bad request """
+
+    def __init__(self) -> None:
+        self.code = 400
+        self.type = 'Bad Request'
+        self.message = 'A bad request error has occurred.  A missing required parameters, or invalid data has caused this error.'  # noqa
+
+
+class Unauthorized(Exception):
+    """ This class represents a 401 unauthorized request """
+
+    def __init__(self) -> None:
+        self.code = 401
+        self.type = 'Unauthorized Request'
+        self.message = 'An unauthorized request was made. The API requires authentication and the client fails to provide valid credentials, this error will occur.'  # noqa
+
+
+class Forbidden(Exception):
+    """ This class represents a 403 unauthorized request """
+
+    def __init__(self) -> None:
+        self.code = 403
+        self.type = 'Forbidden Request'
+        self.message = 'A forbidden request was made. The request was not authorized to perform the requested operation. This may indicate that the client lacks the necessary permissions or credentials'  # noqa
+
+
 class DataNotFound(Exception):
-    def __init__(self, message) -> None:
+    """ This class represents a 404 not found error """
+
+    def __init__(self) -> None:
         self.code = 404
-        self.message = message
+        self.type = 'Not Found'
+        self.message = 'Data was not found.'
+
+
+class Conflict(Exception):
+    """ This class represents a 409 conflict error """
+
+    def __init__(self) -> None:
+        self.code = 409
+        self.type = 'Conflict Error'
+        self.message = 'Conflict with data.This error occurs if the requested POST operation conflicts with the current state of the server'  # noqa
+
+
+class InternalServerError(Exception):
+    """ This class represents a 500 internal server error """
+
+    def __init__(self) -> None:
+        self.code = 500
+        self.type = 'Internal Server Error'
+        self.message = 'An internal server error has occurred. If this message persist please contact customer support.'  # noqa
