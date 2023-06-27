@@ -34,12 +34,12 @@ for local_food_name in local_food_names:
 # imports
 
 from flasgger import swag_from
-from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
 from models import LocalFoodNameModel
-from utils import parse_params
+from utils import (Conflict, DataNotFound, Forbidden, InternalServerError,
+                   parse_params)
 
 # resources
 
@@ -74,8 +74,27 @@ class LocalFoodNameResource(Resource):
             new_local_food_name.save()
 
             return {'Message': f'{name} Category was created successfully'}, 200  # noqa E501
-        except Exception:
-            abort(500)
+
+        except Forbidden as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except Conflict as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @swag_from("../swagger/local_food_name/read_all.yml")
@@ -108,8 +127,19 @@ class LocalFoodNameResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @swag_from("../swagger/local_food_name/read_one.yml")
@@ -138,8 +168,19 @@ class LocalFoodNameResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     # @swag_from("../swagger/local_food_name/read_one_name.yml")
@@ -178,8 +219,19 @@ class LocalFoodNameResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @parse_params(
@@ -229,8 +281,26 @@ class LocalFoodNameResource(Resource):
                 'Message': f'The local food name with id {id} was found and was updated successfully'  # noqa E501
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except Forbidden as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     def delete(id):
@@ -254,5 +324,16 @@ class LocalFoodNameResource(Resource):
                 'Message': f'The local food name with id {id} was found and was deleted successfully'  # noqa E501
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }

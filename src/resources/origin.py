@@ -38,12 +38,12 @@ for origin in origins:
 # imports
 
 from flasgger import swag_from
-from flask import abort
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
 from models import OriginModel
-from utils import parse_params
+from utils import (Conflict, DataNotFound, Forbidden, InternalServerError,
+                   parse_params)
 
 # resources
 
@@ -78,8 +78,27 @@ class OriginResource(Resource):
             new_origin.save()
 
             return {'Message': f'{country} as an origin was created successfully'}, 200  # noqa E501
-        except Exception:
-            abort(500)
+
+        except Forbidden as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except Conflict as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @swag_from("../swagger/origin/read_all.yml")
@@ -112,8 +131,19 @@ class OriginResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @swag_from("../swagger/origin/read_one.yml")
@@ -142,8 +172,19 @@ class OriginResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     # @swag_from("../swagger/origin/read_one_name.yml")
@@ -182,8 +223,19 @@ class OriginResource(Resource):
                 'Data': data
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     @parse_params(
@@ -234,8 +286,26 @@ class OriginResource(Resource):
                 'Message': f'The origin with id {id} was found and was updated successfully'  # noqa E501
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except Forbidden as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
 
     @staticmethod
     def delete(id):
@@ -259,5 +329,16 @@ class OriginResource(Resource):
                 'Message': f'The origin with id {id} was found and was deleted successfully'  # noqa E501
             }, 200
 
-        except Exception:
-            abort(500)
+        except DataNotFound as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }
+
+        except InternalServerError as e:
+            return {
+                'Code': e.code,
+                'Type': e.type,
+                'Message': e.message
+            }

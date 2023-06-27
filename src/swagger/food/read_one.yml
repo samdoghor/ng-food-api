@@ -1,11 +1,11 @@
-title: Get a product's detail
-description: Returns a product's key information
+title: Get a food detail
+description: Returns a food key information
 tags:
   - Foods
-operationId: getproduct
+operationId: getonefood
 
 parameters:
-        - name: productID
+        - name: foodID
           in: path
           required: true
           schema:
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   200:
-    description: Product was successfully retrieved base on ID
+    description: Food was successfully retrieved base on ID
     content:
       application/json:
         schema:
@@ -22,34 +22,31 @@ responses:
           properties:
             id:
               type: integer
-            title:
+            name:
               type: string
-            price:
+            scientific_name:
               type: string
-            short_desc:
+            description:
               type: string
-            seller:
+            category_id:
               type: string
-            product_category:
-              type: string
-            brand:
-              type: string
+
           required:
             - id
-            - title
-            - price
-            - short_desc
-            - seller
-            - product_category
-            - brand
+            - name
+            - scientific_name
+            - description
+            - category_id
+
           example:
             id: 1
-            title: Casio MTP-VD02G-1EUDF
-            price: ₦35,000
-            short_desc: This classic timepiece is in a sporty design that is streamlined for casual sophistication. The minimalist analogue design features a handy date display at the 6 o’clock position. Water resistance for daily use frees you from worry when washing up or out in the rain.
-            seller: Margaret Blinks
-            product_category: Fashion
-            brand: Casio
+            name: Orange
+            scientific_name: Citrus sinensis
+            description: Oranges are citrus fruits known for their bright orange color, sweet and tangy flavor, and high vitamin C content.
+            category: 
+              category_name: Citrus fruits
+              category_description: Citrus fruits are a group of juicy fruits known for their tangy flavor and high vitamin C content.
+
   401:
     description: Not authenticated
     content:
@@ -70,15 +67,15 @@ responses:
             message: Access token does not have the required scope
 
   404:
-    description: Product not found
+    description: Food not found
     content:
       application/json:
         schema:
           type: object
           properties:
           example:
-            message: The Product was not found
+            message: The food was not found
 
-security:
-  - implicit:
-      - get
+# security:
+#   - implicit:
+#       - get

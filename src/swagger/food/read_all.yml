@@ -1,12 +1,12 @@
-title: Get all products
-description: Return all products information
+title: Get all foods
+description: Return all foods information
 tags:
   - Foods
-operationId: getproducts
+operationId: getallfoods
 
 responses:
   200:
-    description: The products information were successfully retrieved
+    description: The foods information were successfully retrieved
     content:
       application/json:
         schema:
@@ -14,50 +14,50 @@ responses:
           items:
             type: object
             properties:
-              title:
+              name:
                 type: string
-                description: The products's title
-              price:
+                description: The foods' names
+              scientific_name:
                 type: string
-                description: The products's price
-              short_desc:
+                description: The foods' scientific names
+              description:
                 type: string
-                description: The products's short description
-              seller:
+                description: Short description of the food
+              categories_id:
                 type: string
-                description: The products's seller
-              product_category:
-                type: string
-                description: The products's category
-              brand:
-                type: string
-                description: The products's brand
+                description: The categories id to establish a relationship with categories
+              
             example:
               "data":
                 [
                   { 
-                  "title": "32\" HiSense Smart Andriod TV", 
-                  "price": "₦80,000", 
-                  "description": "The Hisense 32\" Smart TV offers a compact and versatile entertainment experience. With its vibrant 32-inch display and smart features, including built-in streaming apps and connectivity options, it delivers high-quality visuals and easy access to a variety of content.", 
-                  "seller": "XYZ Electronics", 
-                  "product category": "Electronics", 
-                  "brand": "HiSense" 
+                  "name": "Orange", 
+                  "scientific_name": "Citrus sinensis", 
+                  "description": "Oranges are citrus fruits known for their bright orange color, sweet and tangy flavor, and high vitamin C content.", 
+                  "category": {
+                      "category_name": "Citrus fruits",
+                      "category_description": "Citrus fruits are a group of juicy fruits known for their tangy flavor and high vitamin C content."
+                    }, 
                   },
+
                   { 
-                  "title": "HP Wireless Mouse", 
-                  "price": "₦4,000", 
-                  "description": "The HP Wireless Mouse is a reliable and ergonomic peripheral designed to enhance your computing experience. With its wireless connectivity, you can enjoy seamless cursor control without the hassle of tangled cords. It features precise tracking, comfortable grip, and long battery life, making it an excellent choice for productivity and convenience", 
-                  "seller": "ABC & Chuks Accessories", 
-                  "product category": "Computer Accessories", 
-                  "brand": "HP" 
+                  "name": "Spinach", 
+                  "scientific_name": "Spinacia oleracea", 
+                  "description": "Spinach is a leafy green vegetable that is highly nutritious and versatile in cooking. It is known for its vibrant green color and mild, slightly earthy taste.", 
+                  "category": {
+                      "category_name": "Leafy greens",
+                      "category_description": "Leafy greens refer to a variety of green, leafy vegetables that are highly nutritious and packed with vitamins, minerals, and fiber."
+                    }, 
                   },
+
                   { 
-                  "title": "Casio MTP-VD02G-1EUDF", 
-                  "price": "₦35,000", 
-                  "description": "This classic timepiece is in a sporty design that is streamlined for casual sophistication. The minimalist analogue design features a handy date display at the 6 o’clock position. Water resistance for daily use frees you from worry when washing up or out in the rain.", 
-                  "seller": "Margaret Blinks",
-                  "product category": "Fashion", 
-                  "brand": "Casio" 
+                  "name": "Whole Milk", 
+                  "scientific_name": "Not Applicable", 
+                  "description": "Whole milk is a type of dairy milk that contains a higher fat content compared to other varieties. It is obtained from cows and is not processed to remove the fat.", 
+                  "category": {
+                      "category_name": "Milk",
+                      "category_description": "Milk is a nutrient-rich liquid produced by mammals, primarily cows, that serves as a source of nutrition for their offspring. It is a rich source of calcium, protein, vitamins (such as vitamin D and B12), and mineral."
+                    }, 
                   },
                 ]
   401:
@@ -79,6 +79,6 @@ responses:
           example:
             message: Access token does not have the required scope
 
-security:
-  - implicit:
-      - get
+# security:
+#   - implicit:
+#       - get

@@ -1,11 +1,11 @@
-title: Get a product's detail
-description: Returns a product's key information
+title: Get a food category detail
+description: Returns a food category information
 tags:
   - Food Categories
-operationId: getproduct
+operationId: getonecategory
 
 parameters:
-        - name: productID
+        - name: categoryID
           in: path
           required: true
           schema:
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   200:
-    description: Product was successfully retrieved base on ID
+    description: Category was successfully retrieved base on ID
     content:
       application/json:
         schema:
@@ -22,34 +22,27 @@ responses:
           properties:
             id:
               type: integer
-            title:
+            name:
               type: string
-            price:
+            description:
               type: string
-            short_desc:
-              type: string
-            seller:
-              type: string
-            product_category:
-              type: string
-            brand:
-              type: string
+            group_id:
+              type: integer
+            
           required:
             - id
-            - title
-            - price
-            - short_desc
-            - seller
-            - product_category
-            - brand
+            - name
+            - description
+            - group_id
+
           example:
             id: 1
-            title: Casio MTP-VD02G-1EUDF
-            price: ₦35,000
-            short_desc: This classic timepiece is in a sporty design that is streamlined for casual sophistication. The minimalist analogue design features a handy date display at the 6 o’clock position. Water resistance for daily use frees you from worry when washing up or out in the rain.
-            seller: Margaret Blinks
-            product_category: Fashion
-            brand: Casio
+            name: Citrus fruits
+            description: Citrus fruits are a group of juicy fruits known for their tangy flavor and high vitamin C content.
+            group:
+              group_name: Fruits and vegetables
+              group_description: Fruits and vegetables are vital plant foods, rich in nutrients, vitamins, fiber, and antioxidants. They promote good health and lower the risk of chronic diseases when included in a balanced diet.
+
   401:
     description: Not authenticated
     content:
@@ -70,15 +63,15 @@ responses:
             message: Access token does not have the required scope
 
   404:
-    description: Product not found
+    description: Food category was not found
     content:
       application/json:
         schema:
           type: object
           properties:
           example:
-            message: The Product was not found
+            message: The food category was not found
 
-security:
-  - implicit:
-      - get
+# security:
+#   - implicit:
+#       - get
