@@ -56,12 +56,11 @@ class LocalFoodNameModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # foreign keys
+
     tribe_id = db.Column(db.Integer, db.ForeignKey(
         'tribes.id'), nullable=False)
-    food_id = db.Column(db.Integer, db.ForeignKey('foods.id'), nullable=False)
 
-    # relationships
-    food = db.relationship('FoodModel', backref='local_names')
+    food_id = db.Column(db.Integer, db.ForeignKey('foods.id'), nullable=False)
 
     def __repr__(self):
         return f'LocalFoodName(id={self.id}, name={self.name})'

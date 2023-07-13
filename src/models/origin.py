@@ -59,9 +59,10 @@ class OriginModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
-    # foreign keys
-    food_id = db.Column(db.Integer, db.ForeignKey(
-        'foods.id'), nullable=False)
+    # relationships
+
+    foods = db.relationship(
+        'FoodModel', backref='origins', lazy=True)
 
     def __repr__(self):
         return f'Origin(id={self.id}, country={self.name})'

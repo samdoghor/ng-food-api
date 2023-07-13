@@ -59,6 +59,7 @@ class GroupModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # relationships
+
     categories = db.relationship(
         'CategoryModel', backref='groups', lazy=True)
 

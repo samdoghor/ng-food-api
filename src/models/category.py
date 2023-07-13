@@ -59,8 +59,14 @@ class CategoryModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # foreign keys
+
     group_id = db.Column(db.Integer, db.ForeignKey(
         'groups.id'), nullable=False)
+
+    # relationships
+
+    foods = db.relationship(
+        'FoodModel', backref='categories', lazy=True)
 
     def __repr__(self):
         return f'Category(id={self.id}, name={self.name})'
