@@ -55,12 +55,10 @@ class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
-    # foreign keys
-    nutrient_id = db.Column(db.Integer, db.ForeignKey(
-        'nutrients.id'), nullable=False)
+    # relationships
 
-    food_id = db.Column(db.Integer, db.ForeignKey(
-        'foods.id'), nullable=False)
+    food_nutrients = db.relationship(
+        'FoodNutritionModel', backref='nutrient_values', lazy=True)
 
     def __repr__(self):
-        return f'NutrientValue(name={self.nutrients.name},id={self.id}, quantity={self.quantity})'  # noqa
+        return f'NutrientValue(id={self.id}, quantity={self.quantity})'

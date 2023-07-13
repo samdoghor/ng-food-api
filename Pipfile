@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 flask-restful = "*"
-flask-sqlalchemy = "*"
 psycopg2 = "*"
 python-dotenv = "*"
 mysql-connector-python = "*"
@@ -14,6 +13,8 @@ flask-migrate = "*"
 flask = "*"
 pyyaml = "*"
 flake8 = "*"
+flask-sqlalchemy = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

@@ -62,11 +62,16 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     category_id = db.Column(db.Integer, db.ForeignKey(
         'categories.id'), nullable=False)
 
+    origin_id = db.Column(db.Integer, db.ForeignKey(
+        'origins.id'), nullable=False)
+
     # relationships
-    nutrient_values = db.relationship(
-        'NutrientValueModel', backref='foods', lazy=True)
-    origins = db.relationship(
-        'OriginModel', backref='foods', lazy=True)
+
+    local_food_names = db.relationship(
+        'LocalFoodNameModel', backref='foods', lazy=True)
+
+    food_nutrients = db.relationship(
+        'FoodNutritionModel', backref='foods', lazy=True)
 
     def __repr__(self):
         return f'Food(id={self.id}, name={self.name})'

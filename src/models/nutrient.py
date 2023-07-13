@@ -65,8 +65,9 @@ class NutrientModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # relationships
-    nutrient_values = db.relationship(
-        'NutrientValueModel', backref='nutrients', lazy=True)
+
+    food_nutrients = db.relationship(
+        'FoodNutritionModel', backref='nutrients', lazy=True)
 
     def __repr__(self):
         return f'Nutrient(id={self.id}, name={self.name})'

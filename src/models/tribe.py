@@ -62,6 +62,7 @@ class TribeModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # relationships
+
     local_food_names = db.relationship(
         'LocalFoodNameModel', backref='tribes', lazy=True)
 
