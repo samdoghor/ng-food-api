@@ -42,6 +42,15 @@ class DataNotFound(Exception):
         self.message = 'Data was not found.'
 
 
+class MethodNotAllowed(Exception):
+    """ This class represents a 405 method not allowed error """
+
+    def __init__(self) -> None:
+        self.code = 405
+        self.type = 'Method not Allowed'
+        self.message = 'The HTTP method used for the request is not supported for the requested resource.'  # noqa
+
+
 class Conflict(Exception):
     """ This class represents a 409 conflict error """
 
@@ -49,6 +58,15 @@ class Conflict(Exception):
         self.code = 409
         self.type = 'Conflict Error'
         self.message = 'Conflict with data.This error occurs if the requested POST operation conflicts with the current state of the server'  # noqa
+
+
+class TooManyRequest(Exception):
+    """ This class represents a 429 too many requests error """
+
+    def __init__(self) -> None:
+        self.code = 429
+        self.type = 'Too Many Requests'
+        self.message = 'Too many requests where made within a given time frame, and the server is rate-limiting the  to prevent abuse of API'  # noqa
 
 
 class InternalServerError(Exception):

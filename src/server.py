@@ -28,9 +28,9 @@ server.config['SECRET_KEY'] = config.SECRET_KEY
 
 server.config["SWAGGER"] = {
     "swagger_version": "2.0",
-    "title": "Nigeria Food Database API",
+    "title": "Nigeria Food API",
 
-    "description": """The Nigerian Food Database API is a powerful tool
+    "description": """The Nigerian Food API is a powerful tool
     designed to provide developers with access to a comprehensive
     collection of information about various Nigerian dishes. By utilizing this
     RESTful API, developers can seamlessly integrate data on ingredients,
@@ -39,7 +39,7 @@ server.config["SWAGGER"] = {
     allows for the creation of robust and scalable APIs, and leverages
     PostgreSQL, a popular and reliable open-source relational database
     management system.
-    One of the key features of the Nigerian Food Database API is its extensive
+    One of the key features of the Nigerian Food API is its extensive
     database of ingredients. It offers a wide range of ingredients commonly
     used in Nigerian cuisine, including vegetables, meats, spices, grains, and
     more. Each ingredient entry contains detailed information such as the name,
@@ -75,7 +75,7 @@ for blueprint in vars(routes).values():
 
 @server.route('/')
 def index():
-    """ Confirms and displays basic info that the server is runnign """
+    """ Confirms and displays basic info that the server is running """
 
     server_home = jsonify({
         "App Name": "Nigeria Food Database API",
