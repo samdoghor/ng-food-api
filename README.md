@@ -6,6 +6,8 @@ The Nigerian Food Database API is a RESTful API built with Flask-RESTful and Pos
 
 [Frontend](https://github.com/samdoghor/ngfood_fe) of the Nigeria Food APIs
 
+[Admin](https://github.com/samdoghor/ng-food-admin) of the Nigeria Food APIs
+
 ## Contributing
 
 Contributions to this project are not open at the moment. However, suggestions and feedback are welcome. If you encounter any bugs or have feature requests, please create a new issue on this repository.
