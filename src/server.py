@@ -11,15 +11,14 @@ endpoints for the API.
 
 # imports
 
+from flasgger import Swagger
 from flask import Blueprint, Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_restful import Api
-from flasgger import Swagger
 
-
-from models import db
 import config
 import routes
+from models import db
 
 # instantiation/configuration
 
@@ -51,7 +50,7 @@ server.config["SWAGGER"] = {
     "termsOfService": "#",
     "version": "1.0.0",
     "uiversion": 3,
-    "static_url_path": "/apidocs",
+    "static_url_path": "/v1/docs",
 }
 swagger_config = Swagger.DEFAULT_CONFIG.copy()
 swagger_config["openapi"] = "3.0.3"
@@ -59,7 +58,7 @@ Swagger(server, config=swagger_config)
 
 server.debug = config.DEBUG
 server.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
-server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS  # noqa: E501
+server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS  # noqa
 db.init_app(server)
 db.app = server
 migrate = Migrate(server, db)
