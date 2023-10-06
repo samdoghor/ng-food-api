@@ -240,7 +240,6 @@ class FoodResource(Resource):
         Argument("description", location="json", required=True,
                  help="The short description of the food.")
     )
-    @staticmethod
     def update(id, **args):
         """ Update one food by id """
 
