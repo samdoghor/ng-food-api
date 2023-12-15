@@ -231,9 +231,9 @@ class GroupResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("name", location="json", required=True,
+        Argument("name", location="json",
                  help="The name of the group."),
-        Argument("description", location="json", required=True,
+        Argument("description", location="json",
                  help="The short description of the group.")
     )
     @staticmethod

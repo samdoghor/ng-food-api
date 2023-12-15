@@ -17,3 +17,4 @@ from .category import CategoryModel
 from .group import GroupModel
 from .origin import OriginModel
 from .food_nutrition import FoodNutritionModel
+from .editor import EditorModel
