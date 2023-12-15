@@ -178,7 +178,7 @@ class NutrientValueResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("quantity", location="json", required=True,
+        Argument("quantity", location="json",
                  help="The quantity of the nutrient."),
         Argument("food_id", location="json", required=True,
                  help="The food id to establish a relationship with nutrient value."),  # noqa E501

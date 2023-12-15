@@ -239,11 +239,11 @@ class OriginResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("country", location="json", required=True,
+        Argument("country", location="json",
                  help="The country of origin."),
-        Argument("short_code", location="json", required=True,
+        Argument("short_code", location="json",
                  help="The short code for the country."),
-        Argument("flag", location="json", required=True,
+        Argument("flag", location="json",
                  help="The flag of the country.")  # noqa E501
     )
     @staticmethod

@@ -38,7 +38,7 @@ DEBUG = True
 SQLALCHEMY_DATABASE_URI = f'postgresql://{dbUsername}:{dbPassword}@{dbHost}:{dbPort}/{dbName}'  # noqa
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-# production database
+# # production database
 
 # SQLALCHEMY_DATABASE_URI = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{dbPort}/{POSTGRES_DATABASE}'  # noqa
 # SQLALCHEMY_TRACK_MODIFICATIONS = False

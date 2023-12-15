@@ -15,6 +15,7 @@ pyyaml = "*"
 flake8 = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
+autopep8 = "*"
 
 [dev-packages]
 

@@ -1,7 +1,7 @@
 """
 ## Module Name: group.py
 
-This module defines the Grouplueprint, which is a Flask Blueprint for
+This module defines the GroupBlueprint, which is a Flask Blueprint for
 managing groups.
 
 The GroupBlueprint provides routes for creating, reading, updating, and

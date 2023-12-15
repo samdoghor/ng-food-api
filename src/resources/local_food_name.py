@@ -235,7 +235,7 @@ class LocalFoodNameResource(Resource):
 
     @staticmethod
     @parse_params(
-        Argument("name", location="json", required=True,
+        Argument("name", location="json",
                  help="The local name of the food."),
         Argument("food_id", location="json", required=True,
                  help="The food id to establish a relationship with local food name."),  # noqa E501

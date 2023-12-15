@@ -1,0 +1,91 @@
+title: Get an editor
+description: Returns an editor information
+tags:
+  - Editor
+operationId: getoneeditor
+
+parameters:
+        - name: editorID
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+responses:
+  200:
+    description: Editor was successfully retrieved base on ID
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            first_name:
+                type: string
+                description: The editors' first name.
+            last_name:
+              type: string
+              description: The editors' last name.
+            email_address:
+              type: string
+              description: The editors' email address.
+            is_developer:
+              type: string
+              description: Confirms if editor is a developer.
+            api_key:
+              type: string
+              description: The editors' api key.
+            secret_key:
+              type: string
+              description: The editors' secret.
+            
+          required:
+            - id
+            - first_name
+            - last_name
+            - email_address
+            - is_developer
+            - api_key
+            - secret_key
+
+          example:
+            id: 1
+            first_name: Doghor
+            last_name: Samuel
+            email_address: samdoghor@gmail.com
+            is_developer: true
+            api_key: 0ssdsdaaa0080as0ffg0s0ss
+            secret_key: GHjlsssdsdaaa0Hgsa0as0ffg0s0ss
+
+  401:
+    description: Not authenticated
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Not authenticated
+  403:
+    description: Access token does not have the required scope
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: Access token does not have the required scope
+
+  404:
+    description: Editor was not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+          example:
+            message: The editor was not found
+
+# security:
+#   - implicit:
+#       - get
