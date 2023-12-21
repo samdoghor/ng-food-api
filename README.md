@@ -19,4 +19,4 @@ This project is still in its early stages, and there might not be much functiona
 ## Contact
 
 Official: To contact us, email [info@nifoda.com.ng](mailto:info@nifoda.com.ng)
-Developer: To contact me, email [talkto@samdoghor.com](mailto:talkto@sadoghor.com)
+Developer: To contact me, email [talkto@samdoghor.com](mailto:talkto@samdoghor.com)
