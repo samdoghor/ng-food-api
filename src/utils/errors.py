@@ -1,7 +1,8 @@
 """
 ## Module Name: error.py
 
-This module contains error handling configurations for the Nigeria Food API.
+This module contains error handling configurations for the Nigeria Food
+Database API (NIFODA).
 
 """
 

@@ -2,7 +2,7 @@
 ## Module Name: config.py
 
 This module contains the configuration settings for the Nigeria Food Database
-API.
+API (NIFODA).
 
 It provides environment variables and settings related to the database,
 server, and debugging.

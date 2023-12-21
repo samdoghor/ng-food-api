@@ -1,12 +1,12 @@
-# Nigeria Food APIs
+# Nigeria Food Database APIs (NIFODA)
 
-The Nigerian Food Database API is a RESTful API built with Flask-RESTful and PostgreSQL to provide information on various Nigerian dishes. Developers can access data on ingredients, and nutritional value for each dish to build food-related applications and promote Nigerian cuisine. [Read More](ABOUT.md)
+The Nigerian Food Database API (NIFODA) is a RESTful API built with Flask-RESTful and PostgreSQL to provide information on various Nigerian dishes. Developers can access data on ingredients, and nutritional value for each dish to build food-related applications and promote Nigerian cuisine. [Read More](ABOUT.md)
 
 ## Related Repo
 
-[Frontend](https://github.com/samdoghor/ngfood_fe) of the Nigeria Food APIs
+[Frontend](https://github.com/samdoghor/ngfood_fe) of the Nigeria Food Database APIs (NIFODA)
 
-[Admin](https://github.com/samdoghor/ng-food-admin) of the Nigeria Food APIs
+[Admin](https://github.com/samdoghor/ng-food-admin) of the Nigeria Food Database APIs (NIFODA)
 
 ## Contributing
 
@@ -18,4 +18,5 @@ This project is still in its early stages, and there might not be much functiona
 
 ## Contact
 
-To contact me, email [talkto@samdoghor.com](mailto:talkto@sadoghor.com)
+Official: To contact us, email [info@nifoda.com.ng](mailto:info@nifoda.com.ng)
+Developer: To contact me, email [talkto@samdoghor.com](mailto:talkto@samdoghor.com)
