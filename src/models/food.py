@@ -54,6 +54,7 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     name = db.Column(db.String(), unique=True, nullable=False)
     scientific_name = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
+    pending_approval = db.Column(db.Boolean, default=True)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
