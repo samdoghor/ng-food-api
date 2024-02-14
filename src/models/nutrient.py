@@ -42,10 +42,12 @@ for nutrient in nutrients:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
 
-from .abc import BaseModel, MetaBaseModel
+from sqlalchemy import UUID
 
 from . import db
+from .abc import BaseModel, MetaBaseModel
 
 # model
 
@@ -55,7 +57,7 @@ class NutrientModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'nutrients'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     name = db.Column(db.String(), unique=True, nullable=False)
     short_name = db.Column(db.String(), unique=True)
     value_unit = db.Column(db.String())

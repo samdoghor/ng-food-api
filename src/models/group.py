@@ -37,6 +37,9 @@ for group in groups:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -46,12 +49,12 @@ from .abc import BaseModel, MetaBaseModel
 
 class GroupModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
-    """ This class defines categories in which the food falls under e.g
+    """ This class defines Group in which the food falls under e.g
     Cereal """
 
     __tablename__ = 'groups'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     name = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
 

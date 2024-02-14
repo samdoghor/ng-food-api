@@ -40,6 +40,9 @@ for tribe in tribes:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -53,7 +56,7 @@ class TribeModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'tribes'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     tribe = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
     country = db.Column(db.String())

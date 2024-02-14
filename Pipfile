@@ -16,6 +16,7 @@ flake8 = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 autopep8 = "*"
+kinde-python-sdk = "*"
 
 [dev-packages]
 
