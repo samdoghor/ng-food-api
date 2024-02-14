@@ -9,6 +9,9 @@ items such as Rice, Nutrition and Nutrition Value.
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -21,19 +24,20 @@ class FoodNutritionModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'food_nutritions'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # foreign keys
 
-    food_id = db.Column(db.Integer, db.ForeignKey('foods.id'), nullable=False)
+    food_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
+        'foods.id'), nullable=False)
 
-    nutrient_id = db.Column(db.Integer, db.ForeignKey(
+    nutrient_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'nutrients.id'), nullable=False)
 
-    nutrient_value_id = db.Column(db.Integer, db.ForeignKey(
+    nutrient_value_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'nutrient_values.id'), nullable=False)
 
     def __repr__(self):

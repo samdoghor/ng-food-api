@@ -57,7 +57,7 @@ class KeyManager:
 # # Example usage:
 # api_key, hashed_secret_key, salt = KeyManager.generate_api_key_pair()
 
-# # Store the hashed_secret_key, salt, 
+# # Store the hashed_secret_key, salt,
 # and api_key securely (e.g., in a database)
 
 # # Later, when verifying a key:

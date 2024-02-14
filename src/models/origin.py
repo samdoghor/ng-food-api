@@ -37,6 +37,9 @@ for origin in origins:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -51,7 +54,7 @@ class OriginModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'origins'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     country = db.Column(db.String(), unique=True, nullable=False)
     short_code = db.Column(db.String())
     flag = db.Column(db.String())

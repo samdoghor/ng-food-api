@@ -37,6 +37,9 @@ for nutrient_value in nutrient_values:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -49,7 +52,7 @@ class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'nutrient_values'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     quantity = db.Column(db.Integer, nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

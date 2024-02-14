@@ -37,6 +37,9 @@ for local_food_name in local_food_names:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -49,7 +52,7 @@ class LocalFoodNameModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'local_food_names'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     name = db.Column(db.String(), unique=True, nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -57,10 +60,11 @@ class LocalFoodNameModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     # foreign keys
 
-    tribe_id = db.Column(db.Integer, db.ForeignKey(
+    tribe_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'tribes.id'), nullable=False)
 
-    food_id = db.Column(db.Integer, db.ForeignKey('foods.id'), nullable=False)
+    food_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
+        'foods.id'), nullable=False)
 
     def __repr__(self):
         return f'LocalFoodName(id={self.id}, name={self.name})'

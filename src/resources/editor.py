@@ -33,8 +33,10 @@ for editor in editors:
 # imports
 
 from flasgger import swag_from
+from flask import jsonify
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
+from sqlalchemy.exc import IntegrityError
 
 from models import EditorModel
 from utils import (Conflict, DataNotFound, Forbidden, InternalServerError,
@@ -74,18 +76,33 @@ class EditorResource(Resource):
         """Create a new editor"""
 
         try:
+            editor = EditorModel.query.filter_by(
+                email_address=email_address).first()
+
+            if editor:
+                return jsonify({
+                    "code": 409,
+                    "message": f"{email_address}, already exist."
+                })
             new_editor = EditorModel(
                 first_name=first_name.capitalize(),
                 last_name=last_name.capitalize(),
                 email_address=email_address,
-                password=password,
                 is_developer=is_developer,
                 api_key=api_key,
                 secret_key=secret_key,
             )
+            new_editor.set_password(password)
             new_editor.save()
 
-            return {'Message': f'{first_name} {last_name} was created successfully as an Editor'}, 200  # noqa
+            return {'Message': f'{first_name} {last_name} was added successfully as an Editor'}, 200  # noqa
+
+        except IntegrityError:
+            return {
+                'code': 409,
+                'type': 'Data Integrity',
+                'message': f"{email_address}, already exist."
+            }
 
         except Forbidden as e:
             return {

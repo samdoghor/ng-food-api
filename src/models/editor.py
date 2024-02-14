@@ -8,7 +8,9 @@ This module defines the EditorModel class, representing editors list.
 # imports
 
 from datetime import datetime
+from uuid import uuid4
 
+from sqlalchemy import UUID
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import db
@@ -22,7 +24,7 @@ class EditorModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'editors'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     first_name = db.Column(db.String(), nullable=False)
     last_name = db.Column(db.String(), nullable=False)
     email_address = db.Column(db.String(), unique=True, nullable=False)

@@ -38,6 +38,9 @@ for food in foods:
 # imports
 
 from datetime import datetime
+from uuid import uuid4
+
+from sqlalchemy import UUID
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
@@ -50,7 +53,7 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = 'foods'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     name = db.Column(db.String(), unique=True, nullable=False)
     scientific_name = db.Column(db.String(), unique=True, nullable=False)
     description = db.Column(db.String())
@@ -60,10 +63,10 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     # foreign keys
-    category_id = db.Column(db.Integer, db.ForeignKey(
+    category_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'categories.id'), nullable=False)
 
-    origin_id = db.Column(db.Integer, db.ForeignKey(
+    origin_id = db.Column(UUID(as_uuid=True), db.ForeignKey(
         'origins.id'), nullable=False)
 
     # relationships
