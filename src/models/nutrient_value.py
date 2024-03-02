@@ -55,6 +55,8 @@ class NutrientValueModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     quantity = db.Column(db.Integer, nullable=False)
 
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

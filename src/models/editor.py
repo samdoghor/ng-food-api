@@ -42,6 +42,8 @@ class EditorModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

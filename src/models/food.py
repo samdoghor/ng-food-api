@@ -59,6 +59,8 @@ class FoodModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     description = db.Column(db.String())
     pending_approval = db.Column(db.Boolean, default=True)
 
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

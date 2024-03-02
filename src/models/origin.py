@@ -59,6 +59,8 @@ class OriginModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     short_code = db.Column(db.String())
     flag = db.Column(db.String())
 
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
