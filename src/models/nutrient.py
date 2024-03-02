@@ -63,6 +63,8 @@ class NutrientModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     value_unit = db.Column(db.String())
     is_essential = db.Column(db.Boolean)
 
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

@@ -11,7 +11,6 @@ endpoints for the API.
 
 # imports
 
-from flasgger import Swagger
 from flask import Blueprint, Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_restful import Api
@@ -24,37 +23,6 @@ from models import db
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = config.SECRET_KEY
-
-server.config["SWAGGER"] = {
-    "swagger_version": "2.0",
-    "title": "Nigeria Food Database API (NIFODA)",
-
-    "description": """The Nigerian Food Database API (NIFODA) is a powerful
-    tool designed to provide developers with access to a comprehensive
-    collection of information about various Nigerian dishes. By utilizing this
-    RESTful API, developers can seamlessly integrate data on ingredients,
-    nutritional value, and other pertinent details into their food-related
-    applications. The API is built using Flask-RESTful, a framework that
-    allows for the creation of robust and scalable APIs, and leverages
-    PostgreSQL, a popular and reliable open-source relational database
-    management system.
-    One of the key features of the Nigerian Food Database API (NIFODA) is its
-    extensive database of ingredients. It offers a wide range of ingredients
-    commonly used in Nigerian cuisine, including vegetables, meats, spices,
-    grains, and more. Each ingredient entry contains detailed information such
-    as the name, description, nutritional composition, and potential health
-    benefits. This wealth of information empowers developers to create
-    applications that promote healthier eating habits or assist users in
-    making informed dietary choices.""",
-
-    "termsOfService": "#",
-    "version": "1.0.0",
-    "uiversion": 3,
-    "static_url_path": "/v1/docs",
-}
-swagger_config = Swagger.DEFAULT_CONFIG.copy()
-swagger_config["openapi"] = "3.0.3"
-Swagger(server, config=swagger_config)
 
 server.debug = config.DEBUG
 server.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
