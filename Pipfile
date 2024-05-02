@@ -17,6 +17,7 @@ sqlalchemy = "*"
 autopep8 = "*"
 flask-cors = "*"
 flask-talisman = "*"
+pyjwt = "*"
 
 [dev-packages]
 
