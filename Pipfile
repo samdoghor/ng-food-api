@@ -8,7 +8,6 @@ flask-restful = "*"
 psycopg2 = "*"
 python-dotenv = "*"
 mysql-connector-python = "*"
-flasgger = "*"
 flask-migrate = "*"
 flask = "*"
 pyyaml = "*"
@@ -16,7 +15,9 @@ flake8 = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 autopep8 = "*"
-kinde-python-sdk = "*"
+flask-cors = "*"
+flask-talisman = "*"
+pyjwt = "*"
 
 [dev-packages]
 

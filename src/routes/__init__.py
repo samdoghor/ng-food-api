@@ -7,3 +7,4 @@ from .tribe import TribeBlueprint
 from .origin import OriginBlueprint
 from .local_food_name import LocalFoodNameBlueprint
 from .editor import EditorBlueprint
+from .index import IndexBlueprint
