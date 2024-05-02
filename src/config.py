@@ -51,7 +51,7 @@ test_db_url = f'{dbUsername}:{dbPassword}@{dbHost}:{dbPort}'
 # server
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-ENVIRONMENT = os.getenv("ENVIRONMENT") == "DEV"
-APPLICATION_ROOT = os.getenv("API_APPLICATION_ROOT", "/v1/api")
+ENVIRONMENT = os.getenv("ENVIRONMENT")
+APPLICATION_ROOT = os.getenv("API_APPLICATION_ROOT")
 HOST = os.getenv("APPLICATION_HOST")
-PORT = int(os.getenv("APPLICATION_PORT", "3000"))
+PORT = int(os.getenv("APPLICATION_PORT"))

@@ -6,7 +6,6 @@ Database API (NIFODA).
 
 """
 
-
 class BadRequest(Exception):
     """ This class represents a 400 bad request """
 

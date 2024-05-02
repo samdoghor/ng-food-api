@@ -11,9 +11,11 @@ endpoints for the API.
 
 # imports
 
-from flask import Blueprint, Flask, jsonify, request
+from flask import Blueprint, Flask
 from flask_migrate import Migrate
 from flask_restful import Api
+from flask_talisman import Talisman
+from flask_cors import CORS
 
 import config
 import routes
@@ -22,6 +24,11 @@ from models import db
 # instantiation/configuration
 
 server = Flask(__name__)
+
+Talisman(server)
+cors = CORS(server, resources={
+            r"/api-v1/*": {"origins": "http://localhost:5173/"}})
+
 server.config['SECRET_KEY'] = config.SECRET_KEY
 
 server.debug = config.DEBUG
@@ -32,28 +39,11 @@ db.app = server
 migrate = Migrate(server, db)
 api = Api(server)
 
+
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
         server.register_blueprint(
             blueprint, url_prefix=config.APPLICATION_ROOT)
-
-# homepage
-
-
-@server.route('/')
-def index():
-    """ Confirms and displays basic info that the server is running """
-
-    server_home = jsonify({
-        "App Name": "Nigeria Food Database API (NIFODA)",
-        "API Version": "v1",
-        "Current URL": f"{request.url}",
-        "Endpoints Access": "http://127.0.0.1:3303/[endpoints]",
-        "Message": "The server is up and running",
-        "Version": "1.0.0"
-    })
-
-    return server_home
 
 # run
 

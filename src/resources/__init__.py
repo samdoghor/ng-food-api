@@ -7,3 +7,4 @@ from .local_food_name import LocalFoodNameResource
 from .tribe import TribeResource
 from .origin import OriginResource
 from .editor import EditorResource
+from .index import IndexResource
