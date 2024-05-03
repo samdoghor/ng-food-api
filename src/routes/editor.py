@@ -36,12 +36,14 @@ DELETE /editors/<editor_id>
 # imports
 
 from flask import Blueprint
+from flask_restful import Api
 
 from resources import EditorResource
 
 # configuration
 
 EditorBlueprint = Blueprint("editor", __name__)
+api = Api(EditorBlueprint)
 
 # routes
 
@@ -52,13 +54,10 @@ EditorBlueprint.route(
     "/editors", methods=['GET'])(EditorResource.read_all)
 
 EditorBlueprint.route(
-    "/editors/<int:id>", methods=['GET'])(EditorResource.read_one)
+    "/editors/<uuid:id>", methods=['GET'])(EditorResource.read_one)
 
 EditorBlueprint.route(
-    "/editors/<string:last_name>", methods=['GET'])(EditorResource.read_one_name)  # noqa
+    "/editors/<uuid:id>", methods=['PUT'])(EditorResource.update)
 
 EditorBlueprint.route(
-    "/editors/<int:id>", methods=['PUT'])(EditorResource.update)
-
-EditorBlueprint.route(
-    "/editors/<int:id>", methods=['DELETE'])(EditorResource.delete)
+    "/editors/<uuid:id>", methods=['DELETE'])(EditorResource.delete)

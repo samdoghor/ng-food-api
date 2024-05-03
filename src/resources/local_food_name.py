@@ -6,8 +6,7 @@ resource for managing local food names.
 
 The LocalFoodNameResource class provides CRUD operations (create, read, update,
 delete) for the LocalFoodNameModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -33,7 +32,6 @@ for local_food_name in local_food_names:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -97,7 +95,6 @@ class LocalFoodNameResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/local_food_name/read_all.yml")
     def read_all():
         """ Retrieves all local_food_names """
 
@@ -142,7 +139,6 @@ class LocalFoodNameResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/local_food_name/read_one.yml")
     def read_one(id):
         """ Retrieves one local food name by id """
 
@@ -183,7 +179,6 @@ class LocalFoodNameResource(Resource):
             }
 
     @staticmethod
-    # @swag_from("../swagger/local_food_name/read_one_name.yml")
     def read_one_name(name):
         """ Retrieves one local food name by name """
 

@@ -6,8 +6,7 @@ resource for managing tribes.
 
 The TribeResource class provides CRUD operations (create, read, update,
 delete) for the TribeModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -37,7 +36,6 @@ for tribe in tribes:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -101,7 +99,6 @@ class TribeResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/tribe/read_all.yml")
     def read_all():
         """ Retrieves all tribes """
 
@@ -146,7 +143,6 @@ class TribeResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/tribe/read_one.yml")
     def read_one(id):
         """ Retrieves one tribe by id """
 
@@ -187,7 +183,6 @@ class TribeResource(Resource):
             }
 
     @staticmethod
-    # @swag_from("../swagger/tribe/read_one_name.yml")
     def read_one_name(tribe):
         """ Retrieves one tribe by tribe name """
 

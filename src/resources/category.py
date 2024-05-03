@@ -6,8 +6,7 @@ resource for managing categories.
 
 The CategoryResource class provides CRUD operations (create, read, update,
 delete) for the CategoryModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -35,7 +34,6 @@ for category in categories:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -99,7 +97,6 @@ class CategoryResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/category/read_all.yml")
     def read_all():
         """ Retrieves all categories """
 
@@ -143,7 +140,6 @@ class CategoryResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/category/read_one.yml")
     def read_one(id):
         """ Retrieves one category by id """
 
@@ -183,7 +179,6 @@ class CategoryResource(Resource):
             }
 
     @staticmethod
-    # @swag_from("../swagger/category/read_one_name.yml")
     def read_one_name(name):
         """ Retrieves one category by category name """
 
