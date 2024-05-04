@@ -55,3 +55,8 @@ ENVIRONMENT = os.getenv("ENVIRONMENT")
 APPLICATION_ROOT = os.getenv("API_APPLICATION_ROOT")
 HOST = os.getenv("APPLICATION_HOST")
 PORT = int(os.getenv("APPLICATION_PORT"))
+ALGORITHM = os.getenv("ALGORITHM")
+
+# debugging
+
+DEBUG = True

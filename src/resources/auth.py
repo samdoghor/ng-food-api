@@ -5,7 +5,7 @@ argument -- description
 Return: return_description
 """
 
-# from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 
 from flask.json import jsonify
 from flask_restful import Resource
@@ -52,11 +52,11 @@ class AuthResource(Resource):
                 }), 404
 
             auth_token = editor_email.encode_token(
-                editor_email.id, editor_email.first_name,
+                str(editor_email.id), editor_email.first_name,
                 editor_email.last_name)
 
-            # pay_load = auth_token.split(" ")[1].encode('utf-8')
-            # expires = decode_auth_token(pay_load['exp'])
+            expires = (datetime.now() + timedelta(seconds=600)
+                       ).strftime("%H:%M")
 
             if editor_email:
                 if editor_password:
@@ -65,6 +65,7 @@ class AuthResource(Resource):
                         'code status': 'successful',
                         'message': 'Successfully logged in.',
                         'auth token': auth_token,
+                        'token_expires_by': expires,
                         'editor id': editor_email.id
                     })
 
