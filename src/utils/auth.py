@@ -27,8 +27,8 @@ def encode_auth_token(id, first_name, last_name):
         }
         return jwt.encode(
             payload,
-            config.application_secret_key,
-            algorithm=config.application_algorithm
+            config.SECRET_KEY,
+            algorithm=config.ALGORITHM
         )
     except Exception as e:
         return e
@@ -42,8 +42,8 @@ def decode_auth_token(auth_token):
     :return: integer|string
     """
     try:
-        payload = jwt.decode(auth_token, config.application_secret_key,
-                             algorithms=[config.application_algorithm])
+        payload = jwt.decode(auth_token, config.SECRET_KEY,
+                             algorithms=[config.ALGORITHM])
         return payload
     except jwt.ExpiredSignatureError:
         return 'Signature expired. Please log in again.'

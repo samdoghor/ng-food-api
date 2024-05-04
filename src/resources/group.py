@@ -6,8 +6,7 @@ resource for managing groups.
 
 The GroupResource class provides CRUD operations (create, read, update,
 delete) for the GroupModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -35,7 +34,6 @@ for group in groups:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -96,7 +94,6 @@ class GroupResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/group/read_all.yml")
     def read_all():
         """ Retrieves all groups """
 
@@ -140,7 +137,6 @@ class GroupResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/group/read_one.yml")
     def read_one(id):
         """ Retrieves one group by id """
 
@@ -180,7 +176,6 @@ class GroupResource(Resource):
             }
 
     @staticmethod
-    # @swag_from("../swagger/group/read_one_name.yml")
     def read_one_name(name):
         """ Retrieves one group by group name """
 

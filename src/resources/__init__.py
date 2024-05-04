@@ -8,3 +8,4 @@ from .tribe import TribeResource
 from .origin import OriginResource
 from .editor import EditorResource
 from .index import IndexResource
+from .auth import AuthResource

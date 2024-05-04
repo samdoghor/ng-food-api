@@ -15,6 +15,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import db
 from .abc import BaseModel, MetaBaseModel
+from utils import encode_auth_token
 
 # model
 
@@ -35,6 +36,9 @@ class EditorModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     last_editor_login = db.Column(db.DateTime, default=datetime.utcnow)
     api_key = db.Column(db.String(), unique=True, nullable=True)
     secret_key = db.Column(db.String(), unique=True, nullable=True)
+    salt = db.Column(db.String(), unique=True, nullable=True)
+
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -42,7 +46,8 @@ class EditorModel(db.Model, BaseModel, metaclass=MetaBaseModel):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    is_approved = db.Column(db.Boolean, default=False, nullable=False)
+    def encode_token(self, id, first_name, last_name):
+        return encode_auth_token(id, first_name, last_name)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)

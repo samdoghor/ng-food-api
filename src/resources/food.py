@@ -6,8 +6,7 @@ resource for managing foods.
 
 The FoodResource class provides CRUD operations (create, read, update,
 delete) for the FoodModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -36,7 +35,6 @@ for food in foods:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -100,7 +98,6 @@ class FoodResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/food/read_all.yml")
     def read_all():
         """ Retrieves all foods """
 
@@ -144,7 +141,6 @@ class FoodResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/food/read_one.yml")
     def read_one(id):
         """ Retrieves one food by id """
 
@@ -184,7 +180,6 @@ class FoodResource(Resource):
             }
 
     @staticmethod
-    # @swag_from("../swagger/food/read_one_name.yml")
     def read_one_name(name):
         """ Retrieves one food by food name """
 

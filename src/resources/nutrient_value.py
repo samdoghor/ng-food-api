@@ -6,8 +6,7 @@ resource for managing nutrients values.
 
 The NutrientValueResource class provides CRUD operations (create, read, update,
 delete) for the NutrientValueModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 Example Usage:
 --------------
@@ -25,7 +24,6 @@ for nutrient_value in nutrients_values:
 
 # imports
 
-from flasgger import swag_from
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
@@ -91,7 +89,6 @@ class NutrientValueResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/nutrient_value/read_all.yml")
     def read_all():
         """ Retrieves all nutrients values """
 
@@ -136,7 +133,6 @@ class NutrientValueResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/nutrient_value/read_one.yml")
     def read_one(id):
         """ Retrieves one nutrient value by id """
 

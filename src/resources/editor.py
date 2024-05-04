@@ -6,8 +6,7 @@ resource for managing editors.
 
 The EditorResource class provides CRUD operations (create, read, update,
 delete) for the EditorModel class.
-It utilizes the Flask-RESTful library for creating a RESTful API, and the
-flasgger library for Swagger API documentation.
+It utilizes the Flask-RESTful library for creating a RESTful API
 
 ## Example Usage:
 
@@ -32,7 +31,6 @@ for editor in editors:
 
 # imports
 
-from flasgger import swag_from
 from flask import jsonify
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
@@ -40,7 +38,7 @@ from sqlalchemy.exc import IntegrityError
 
 from models import EditorModel
 from utils import (Conflict, DataNotFound, Forbidden, InternalServerError,
-                   parse_params)
+                   parse_params, KeyManager)
 
 # resources
 
@@ -65,14 +63,18 @@ class EditorResource(Resource):
                  help="The email address of the editor."),
         Argument("password", location="json", required=True,
                  help="The password of the editor."),
-        Argument("is_developer", location="json",
+        Argument("is_admin", location="json", type=bool, required=True,
+                 help="Determine if the personel is an admin."),
+        Argument("is_developer", location="json", type=bool, required=True,
                  help="Determine if the personel is a developer."),
         Argument("api_key", location="json",
-                 help="The API key for developers."),
+                 help="The api key of the editor."),
         Argument("secret_key", location="json",
-                 help="The Secret key for developers."),
+                 help="The secret key of the editor.."),
+        Argument("salt", location="json",
+                 help="The salt for secret key of the editor.."),
     )
-    def create(first_name, last_name, email_address, password, is_developer, api_key, secret_key):  # noqa
+    def create(first_name, last_name, email_address, password, is_admin, is_developer, api_key, secret_key, salt):  # noqa
         """Create a new editor"""
 
         try:
@@ -82,20 +84,42 @@ class EditorResource(Resource):
             if editor:
                 return jsonify({
                     "code": 409,
-                    "message": f"{email_address}, already exist."
+                    'code status': 'Duplicate email',
+                    "message": f"{email_address}, already has an account."
                 })
+
+            # Generate API key pair
+            api_key, hashed_secret_key, salt = KeyManager.generate_api_key_pair()  # noqa
+
+            # Create new editor
+
             new_editor = EditorModel(
                 first_name=first_name.capitalize(),
                 last_name=last_name.capitalize(),
                 email_address=email_address,
+                is_admin=is_admin,
                 is_developer=is_developer,
                 api_key=api_key,
-                secret_key=secret_key,
+                secret_key=hashed_secret_key,
+                salt=salt
             )
             new_editor.set_password(password)
             new_editor.save()
 
-            return {'Message': f'{first_name} {last_name} was added successfully as an Editor'}, 200  # noqa
+            return jsonify({
+                'code': 200,
+                'code_status': 'Successful',
+                'data': {
+                    'id': new_editor.id,
+                    'first name': new_editor.first_name,
+                    'last name': new_editor.last_name,
+                    'email address': new_editor.email_address,
+                    'is admin': new_editor.is_admin,
+                    'is developer': new_editor.is_developer,
+                    'api key': new_editor.api_key,
+                    'secret key': new_editor.secret_key
+                }
+            }), 200  # noqa
 
         except IntegrityError:
             return {
@@ -126,7 +150,6 @@ class EditorResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/editor/read_all.yml")
     def read_all():
         """ Retrieves all editors """
 
@@ -135,29 +158,29 @@ class EditorResource(Resource):
 
             if not editors:
                 return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': 'No groeditor was not found'
+                    'code': 404,
+                    'code status': 'Client errors',
+                    'message': 'No editor was not found'
                 }, 404
 
             data = []
 
-            for edit in editors:
+            for editor in editors:
                 data.append({
-                    'id': edit.id,
-                    'first_name': edit.first_name.capitalize(),
-                    'last_name': edit.last_name.capitalize(),
-                    'email_address': edit.email_address,
-                    'password': edit.password,
-                    'is_developer': edit.is_developer,
-                    'api_key': edit.api_key,
-                    'secret_key': edit.secret_key,
+                    'id': editor.id,
+                    'first name': editor.first_name,
+                    'last name': editor.last_name,
+                    'email address': editor.email_address,
+                    'is admin': editor.is_admin,
+                    'is developer': editor.is_developer,
+                    'api key': editor.api_key,
+                    'secret key': editor.secret_key
                 })
 
             return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Data': data
+                'code': 200,
+                'code status': 'Successful',
+                'data': data
             }, 200
 
         except DataNotFound as e:
@@ -175,7 +198,6 @@ class EditorResource(Resource):
             }
 
     @staticmethod
-    @swag_from("../swagger/editor/read_one.yml")
     def read_one(id):
         """ Retrieves one editor by id """
 
@@ -184,80 +206,26 @@ class EditorResource(Resource):
 
             if not editor:
                 return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': f'The editor with id {id} was not found'
+                    'code': 404,
+                    'code status': 'Client errors',
+                    'message': f'The editor with id {id} was not found'
                 }, 404
 
             data = {
-                'first_name': editor.first_name.capitalize(),
-                'last_name': editor.last_name.capitalize(),
-                'email_address': editor.email_address,
-                'password': editor.password,
-                'is_developer': editor.is_developer,
-                'api_key': editor.api_key,
-                'secret_key': editor.secret_key,
+                'id': editor.id,
+                'first name': editor.first_name,
+                'last name': editor.last_name,
+                'email address': editor.email_address,
+                'is admin': editor.is_admin,
+                'is developer': editor.is_developer,
+                'api key': editor.api_key,
+                'secret key': editor.secret_key
             }
 
             return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Data': data
-            }, 200
-
-        except DataNotFound as e:
-            return {
-                'Code': e.code,
-                'Type': e.type,
-                'Message': e.message
-            }
-
-        except InternalServerError as e:
-            return {
-                'Code': e.code,
-                'Type': e.type,
-                'Message': e.message
-            }
-
-    @staticmethod
-    # @swag_from("../swagger/editor/read_one_name.yml")
-    def read_one_name(last_name):
-        """ Retrieves one editor by editor's last name """
-
-        try:
-            editor = EditorModel.query.filter((
-                EditorModel.last_name == last_name.title()) | (
-                EditorModel.last_name == last_name.capitalize()) | (
-                EditorModel.last_name == last_name.lower()) | (
-                EditorModel.last_name == last_name.upper())).first()
-
-            if not editor:
-                return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': f'The editor {last_name} was not found'
-                }, 404
-
-            last_updated = editor.updated_at
-
-            if last_updated is None:
-                last_updated = editor.created_at
-
-            data = {
-                'first_name': editor.first_name.capitalize(),
-                'last_name': editor.last_name.capitalize(),
-                'email_address': editor.email_address,
-                'password': editor.password,
-                'is_developer': editor.is_developer,
-                'api_key': editor.api_key,
-                'secret_key': editor.secret_key,
-                f'{last_name.lower()} was last_updated': last_updated.date()
-            }
-
-            return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Data': data
+                'code': 200,
+                'code status': 'Successful',
+                'data': data
             }, 200
 
         except DataNotFound as e:
@@ -284,7 +252,9 @@ class EditorResource(Resource):
                  help="The email address of the editor."),
         Argument("password", location="json",
                  help="The password of the editor."),
-        Argument("is_developer", location="json",
+        Argument("is_admin", location="json", type=bool,
+                 help="Determine if the personel is an admin."),
+        Argument("is_developer", location="json", type=bool,
                  help="Determine if the personel is a developer."),
         Argument("api_key", location="json",
                  help="The API key for developers."),
@@ -300,9 +270,9 @@ class EditorResource(Resource):
 
             if not editor:
                 return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': f'The editor with id {id} was not found'
+                    'code': 404,
+                    'code status': 'Client errors',
+                    'message': f'The editor with id {id} was not found'
                 }, 404
 
             if 'first_name' in args and args['first_name'] is not None:
@@ -317,6 +287,12 @@ class EditorResource(Resource):
             if 'password' in args and args['password'] is not None:
                 editor.password = args['password']
 
+            if 'is_admin' in args and args['is_admin'] is not None:
+                editor.is_admin = args['is_admin']
+
+            if 'is_developer' in args and args['is_developer'] is not None:
+                editor.is_developer = args['is_developer']
+
             if 'api_key' in args and args['api_key'] is not None:
                 editor.api_key = args['api_key']
 
@@ -326,20 +302,20 @@ class EditorResource(Resource):
             editor.save()
 
             data = {
-                'first_name': editor.first_name.capitalize(),
-                'last_name': editor.last_name.capitalize(),
-                'email_address': editor.email_address,
-                'password': editor.password,
-                'is_developer': editor.is_developer,
-                'api_key': editor.api_key,
-                'secret_key': editor.secret_key,
+                'id': editor.id,
+                'first name': editor.first_name,
+                'last name': editor.last_name,
+                'email address': editor.email_address,
+                'is admin': editor.is_admin,
+                'is developer': editor.is_developer,
+                'api key': editor.api_key,
+                'secret key': editor.secret_key
             }
 
             return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Data': data,
-                'Message': f'The editor with id {id} was found and was updated successfully'  # noqa E501
+                'code': 200,
+                'code status': 'Successful',
+                'data': data,
             }, 200
 
         except DataNotFound as e:
@@ -372,17 +348,17 @@ class EditorResource(Resource):
 
             if not editor:
                 return {
-                    'Code': 404,
-                    'Code Type': 'Client errors',
-                    'Message': f'The editor with id {id} was not found'
+                    'code': 404,
+                    'code status': 'Client errors',
+                    'message': f'The editor with id {id} was not found'
                 }, 404
 
             editor.delete()
 
             return {
-                'Code': 200,
-                'Code Type': 'Success',
-                'Message': f'The editor with id {id} was found and was deleted successfuly'  # noqa E501
+                'code': 200,
+                'code status': 'Successful',
+                'message': f'The editor with id {id} was found and was deleted successfully'  # noqa E501
             }, 200
 
         except DataNotFound as e:
